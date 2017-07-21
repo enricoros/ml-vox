@@ -39,6 +39,7 @@ define('CSAJAX_DEBUG', false);
  */
 $valid_requests = array(
     'http://www.qualcommlife.com/blog/feed/rss/our-blog',
+    'https://aws.amazon.com/blogs/ai/feed/',
     'https://machinelearning.apple.com/feed.xml',
     'https://www.blogger.com/feeds/21224994/posts/default',
     'https://deepmind.com/blog/feed/basic/',
