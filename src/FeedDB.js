@@ -1,6 +1,6 @@
 const LOGO_FILES = {
   'Qualcomm': 'logo-qualcomm.png',
-  'Qualcomm Ventures': 'logo-qualcomm-ventures.png',
+  // 'Qualcomm Ventures': 'logo-qualcomm-ventures.png',
   'Amazon': 'logo-amazon.png',
   'Apple': 'logo-apple.png',
   'Google': 'logo-google.png',
@@ -17,19 +17,22 @@ const QFEEDS = [
   //   id: 'q1',
   //   company: 'Qualcomm',
   //   name: 'Qualcomm Developer Network Blogs',
-  //   url: 'https://developer.qualcomm.com/rssfeed'
+  //   url: 'https://developer.qualcomm.com/rssfeed',
+  //   home: 'https://developer.qualcomm.com/blogs'
   // },
   // {
   //   id: 'q2',
   //   company: 'Qualcomm Ventures',
   //   name: 'Qualcomm Ventures',
-  //   url: 'https://medium.com/feed/qualcomm-ventures'
+  //   url: 'https://medium.com/feed/qualcomm-ventures',
+  //   home: 'https://medium.com/qualcomm-ventures'
   // },
   {
     id: 'q3',
     company: 'Qualcomm',
     name: 'Qualcomm Life',
-    url: 'http://www.qualcommlife.com/blog/feed/rss/our-blog?format=feed'
+    url: 'http://www.qualcommlife.com/blog/feed/rss/our-blog?format=feed',
+    home: 'http://www.qualcommlife.com/blog'
   },
   // {
   //   id: 'q4',
@@ -41,63 +44,73 @@ const QFEEDS = [
     id: 'am',
     company: 'Amazon',
     name: 'Amazon AI Blog',
-    url: 'https://aws.amazon.com/blogs/ai/feed/'
+    url: 'https://aws.amazon.com/blogs/ai/feed/',
+    home: 'https://aws.amazon.com/blogs/ai/'
   },
   {
     id: 'aa',
     company: 'Apple',
     name: 'Apple Machine Learning Journal',
-    url: 'https://machinelearning.apple.com/feed.xml'
+    url: 'https://machinelearning.apple.com/feed.xml',
+    home: 'https://machinelearning.apple.com/'
   },
   {
     id: 'g1',
     company: 'Google',
     comments: 'Brain, NO Magenta, etc.',
     name: 'Google Research Blog',
-    // url: 'https://www.blogger.com/feeds/21224994/posts/default'
-    url: 'https://www.blogger.com/feeds/21224994/posts/default/-/Machine%20Learning'
+    // url: 'https://www.blogger.com/feeds/21224994/posts/default',
+    url: 'https://www.blogger.com/feeds/21224994/posts/default/-/Machine%20Learning',
+    home: 'https://research.googleblog.com/'
   },
   {
     id: 'g2',
     company: 'Google DeepMind',
     name: 'Deep Mind Blog',
-    url: 'https://deepmind.com/blog/feed/basic/'
+    url: 'https://deepmind.com/blog/feed/basic/',
+    home: 'https://deepmind.com/blog/'
   },
   {
     id: 'g3',
     company: 'Google',
     name: 'Magenta',
-    url: 'https://magenta.tensorflow.org/feed.xml'
+    url: 'https://magenta.tensorflow.org/feed.xml',
+    home: 'https://magenta.tensorflow.org/blog/'
   },
   {
     id: 'ii',
     company: 'Intel',
     name: 'Intel Nervana Blog',
-    url: 'https://www.intelnervana.com/feed/'
+    url: 'https://www.intelnervana.com/feed/',
+    home: 'https://www.intelnervana.com/blog/'
   },
   {
     id: 'mm',
     company: 'Microsoft',
     name: 'Microsoft Next',
-    url: 'https://blogs.microsoft.com/next/feed/'
+    url: 'https://blogs.microsoft.com/next/feed/',
+    home: 'https://blogs.microsoft.com/next/'
   },
   {
     id: 'ff',
     company: 'Facebook',
     name: 'Caffe2 Blog',
-    url: 'https://caffe2.ai/feed.xml'
+    url: 'https://caffe2.ai/feed.xml',
+    home: 'https://caffe2.ai/blog/'
   },
   {
     id: 'nn',
     company: 'NVIDIA',
     name: 'NVIDIA Deep Learning',
-    url: 'https://blogs.nvidia.com/blog/category/deep-learning/feed/'
+    url: 'https://blogs.nvidia.com/blog/category/deep-learning/feed/',
+    home: 'https://blogs.nvidia.com/blog/category/deep-learning/'
   },
   {
     id: 'cc',
     company: 'CEVA',
     name: 'CEVA Experts Blog',
-    url: 'http://www.ceva-dsp.com/ourblog/feed/'
+    url: 'http://www.ceva-dsp.com/ourblog/feed/',
+    home: 'http://www.ceva-dsp.com/ourblog/'
   }
 ];
 

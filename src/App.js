@@ -47,7 +47,7 @@ const Post = ({post}) =>
       <div className="Footer">
         <Row>
           <Col md={8} style={{textAlign: 'left'}}>- {post._author || post.feed.title}, {humanDate(post.date)}</Col>
-          <Col md={4} style={{textAlign: 'right'}}><a href={post.feed.url}>- {post.qf.name}</a></Col>
+          <Col md={4} style={{textAlign: 'right'}}><a href={post.qf.home}>- {post.qf.name}</a></Col>
         </Row>
       </div>
     </div>
