@@ -68,7 +68,7 @@ const stringHash = (str) => {
 
 const hashForPost = (p) => stringHash(p.qf.id + p.date);
 
-class FeedList extends Component {
+class FeedPosts extends Component {
   render() {
     const today = Date.now() - 1.2 * 24 * 3600 * 1000;
     let filteredPosts = this.props.posts.filter(p => this.props.filterByCompany ? p.qf.company === this.props.filterByCompany : true);
@@ -183,7 +183,7 @@ class App extends Component {
                 onScaleChange={this.onScaleChange.bind(this)}/>
         <div className='container App-Body'>
           <LogoList onCompanyFilter={this.onCompanyFilter.bind(this)}/>
-          <FeedList posts={this.state.posts} filterByCompany={this.state.filterByCompany}/>
+          <FeedPosts posts={this.state.posts} filterByCompany={this.state.filterByCompany}/>
         </div>
       </div>
     );

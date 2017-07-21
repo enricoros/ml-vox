@@ -42,7 +42,7 @@ $valid_requests = array(
     'https://aws.amazon.com/blogs/ai/feed/',
     'https://machinelearning.apple.com/feed.xml',
     'https://www.blogger.com/feeds/21224994/posts/default',
-    'https://www.blogger.com/feeds/21224994/posts/default/-/Machine%20Learning',
+    'https://www.blogger.com/feeds/21224994/posts/default/-/Machine Learning',
     'https://deepmind.com/blog/feed/basic/',
     'https://magenta.tensorflow.org/feed.xml',
     'https://www.intelnervana.com/feed/',
