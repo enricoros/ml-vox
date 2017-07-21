@@ -47,6 +47,7 @@ $valid_requests = array(
     'https://blogs.microsoft.com/next/feed/',
     'https://caffe2.ai/feed.xml',
     'https://blogs.nvidia.com/blog/category/deep-learning/feed/',
+    'http://www.ceva-dsp.com/ourblog/feed/',
     // 'example.com'
 );
 
