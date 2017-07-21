@@ -1,6 +1,7 @@
 const LOGO_FILES = {
   'Qualcomm': 'logo-qualcomm.png',
   'Qualcomm Ventures': 'logo-qualcomm-ventures.png',
+  'Amazon': 'logo-amazon.png',
   'Apple': 'logo-apple.png',
   'Google': 'logo-google.png',
   'Google DeepMind': 'logo-google-deepmind.png',
@@ -36,6 +37,12 @@ const QFEEDS = [
   //   name: 'Qualcomm SEC Filings',
   //   url: 'http://apps.shareholder.com/rss/rss.aspx?channels=682&companyid=QCOM'
   // },
+  {
+    id: 'am',
+    company: 'Amazon',
+    name: 'Amazon AI Blog',
+    url: 'https://aws.amazon.com/blogs/ai/feed/'
+  },
   {
     id: 'aa',
     company: 'Apple',
