@@ -120,7 +120,8 @@
 }
 
 .Post.TheEnd {
-  color: gray;
+  font-family: 'Domine', serif;
+  color: lightgray;
   text-align: center;
 }
 
