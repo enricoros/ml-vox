@@ -1,0 +1,166 @@
+.App-header {
+  font-family: 'Noto Serif', serif;
+  background-color: #263238;
+  padding: 20px;
+  color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+}
+
+.App-header h2 {
+  font-size: 30px;
+  margin: 15px 0;
+}
+
+.btn-transparent,
+.btn-transparent:focus {
+  background: none;
+  box-shadow: none;
+  border: none;
+  outline: none;
+  color: white;
+  text-shadow: none;
+}
+
+.App-header-right {
+  text-align: right;
+}
+
+.App-Body {
+  margin-top: 108px;
+}
+
+.LogoList {
+  text-align: center;
+  padding: 2em 0;
+  margin-bottom: -2em;
+}
+
+.LogoList img {
+  max-height: 30px;
+  line-height: 30px;
+  padding: 5px 20px;
+}
+
+.Separator {
+  height: 15px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #eee;
+  text-align: center;
+}
+
+.Separator > span {
+  font-family: 'Domine', serif;
+  font-size: 26px;
+  line-height: 26px;
+  background-color: white;
+  color: lightgray;
+  padding: 0 1em;
+}
+
+.Post {
+  margin-top: 40px;
+  /*max-width: 800px;*/
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.Post h2 {
+  font-family: 'Domine', serif;
+  font-size: 26px;
+  line-height: 1.3em;
+  margin: 0.9em 0 0.4em 0;
+}
+
+.Post .Content {
+  font-family: 'Noto Serif', serif;
+  font-size: 16px;
+  line-height: 1.84em;
+}
+
+.Post .Content > p {
+  margin: 0;
+}
+
+.Post .Content .Company {
+  font-family: 'Domine', serif;
+  float: left;
+  width: 7em;
+  /*padding: 0.76em 1em;*/
+  padding: 0.76em 0.3em;
+  margin-top: 0.3em;
+  margin-right: 0.4em;
+  font-size: 22px;
+  line-height: 22px;
+  text-align: center;
+  background: #eee;
+}
+
+.Post .Content .Company > img {
+  max-height: 38px;
+}
+
+.Post .Content .Thumbnail {
+  float: right;
+  margin-left: 0.4em;
+  padding: 0.4em;
+  background: #eee;
+}
+
+.Post .Content .Thumbnail > img {
+  max-height: 100px;
+}
+
+.Post .Footer {
+  color: gray;
+  text-align: center;
+}
+
+.Post.TheEnd {
+  color: gray;
+  text-align: center;
+}
+
+/* Small Style changes */
+
+.App-Small .App-header {
+  padding: 0;
+}
+
+.App-Small .App-header h2 {
+  font-size: 24px;
+}
+
+.App-Small .App-Body {
+  margin-top: 64px;
+}
+
+.App-Small .LogoList {
+  display: none;
+}
+
+.App-Small .Post {
+  margin-top: 10px;
+}
+
+.App-Small .Post h2 {
+  font-size: 20px;
+}
+
+.App-Small .Post .Content {
+  font-size: 13px;
+  color: #333;
+}
+
+.App-Small .Post .Content .Company {
+  width: 4em;
+  padding: 0.2em;
+}
+
+.App-Small .Post .Content .Company > img,
+.App-Small .Post .Content .Thumbnail > img {
+  max-height: 18px;
+}
