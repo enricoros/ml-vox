@@ -1,3 +1,13 @@
+html {
+  overflow-y: scroll;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
 .App-header {
   font-family: 'Noto Serif', serif;
   background-color: #263238;

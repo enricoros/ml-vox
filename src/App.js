@@ -71,16 +71,17 @@ const hashForPost = (p) => stringHash(p.qf.id + p.date);
 class FeedList extends Component {
   render() {
     const today = Date.now() - 1.2 * 24 * 3600 * 1000;
-    const todaysPosts = this.props.posts.filter(p => p.date >= today);
-    const afterPosts = this.props.posts.filter(p => p.date < today);
+    let filteredPosts = this.props.posts.filter(p => this.props.filterByCompany ? p.qf.company === this.props.filterByCompany : true);
+    const todayPosts = filteredPosts.filter(p => p.date >= today);
+    const afterPosts = filteredPosts.filter(p => p.date < today);
     return <div>
-      {todaysPosts && <div>{todaysPosts.map(p => <Post post={p} key={hashForPost(p)}/>)}</div>}
-      <Separator title="Yesterday and earlier"/>
-      {afterPosts && <div>{afterPosts.map(p => <Post post={p} key={hashForPost(p)}/>)}</div>}
+      {todayPosts.length > 0 && <div>{todayPosts.map(p => <Post post={p} key={hashForPost(p)}/>)}</div>}
+      {todayPosts.length > 0 && <Separator title="Yesterday and before"/>}
+      {afterPosts.length > 0 && <div>{afterPosts.map(p => <Post post={p} key={hashForPost(p)}/>)}</div>}
       <hr/>
       <div className="Post TheEnd">
         <h3>&nbsp;</h3>
-        <h3>Only showing up to 3 weeks. Everything else is old.</h3>
+        <h3>Only showing up to 4 weeks. Everything else is old.</h3>
         <h3>Enjoy</h3>
         <h3>&nbsp;</h3>
       </div>
@@ -105,21 +106,21 @@ const Header = ({onRefreshClick, scale, onScaleChange}) =>
     </div>
   </div>;
 
-class LogoList extends Component {
-  render() {
-    return (
-      <div className="LogoList">
-        {Object.keys(LOGO_FILES).sort().map(key => LOGO_FILES[key]).map(path => <img src={path} key={stringHash(path)} alt=""/>)}
-      </div>
-    )
-  }
-}
+const LogoList = ({onCompanyFilter}) =>
+  <div className="LogoList">
+    {Object.keys(LOGO_FILES).sort().map(company_name =>
+      <img src={LOGO_FILES[company_name]} key={company_name} alt="" data-company_name={company_name}
+           onMouseEnter={e => onCompanyFilter(company_name, false)} onMouseLeave={e => onCompanyFilter(null, false)}
+           onClick={e => onCompanyFilter(company_name, true)} style={{cursor: 'pointer'}}/>)}
+  </div>;
 
 class App extends Component {
   aggregatedFeeds = {};
   state = {
-    scale: 'Large',
-    posts: []
+    filterByCompany: null,
+    filterSticky: false,
+    posts: [],
+    scale: 'Large'
   };
 
   componentDidMount() {
@@ -146,8 +147,8 @@ class App extends Component {
         posts = posts.concat(feed.posts);
       });
       // update the UI with sorted posts by time, newest on top, without posts older than 2 months
-      const recentEnough = Date.now() - 3 * 7 * 24 * 3600 * 1000;
-      const sortedPosts = posts.sort((a, b) => b.date - a.date).filter(p => p.date > recentEnough);
+      const recentEnough = Date.now() - 4 * 7 * 24 * 3600 * 1000;
+      const sortedPosts = posts.filter(p => p.date > recentEnough).sort((a, b) => b.date - a.date);
       this.setState({posts: sortedPosts});
     }));
   }
@@ -158,14 +159,31 @@ class App extends Component {
     });
   }
 
+  onCompanyFilter(companyName, sticky) {
+    if (sticky) {
+      const disabling = this.state.filterSticky && this.state.filterByCompany === companyName;
+      this.setState({
+        filterByCompany: disabling ? null : companyName,
+        filterSticky: !disabling
+      });
+    } else {
+      const whileSticky = this.state.filterSticky;
+      if (!whileSticky) {
+        this.setState({
+          filterByCompany: companyName
+        });
+      }
+    }
+  }
+
   render() {
     return (
       <div className={'App-' + this.state.scale}>
         <Header onRefreshClick={this.onRefreshClicked.bind(this)} scale={this.state.scale}
                 onScaleChange={this.onScaleChange.bind(this)}/>
         <div className='container App-Body'>
-          <LogoList/>
-          <FeedList posts={this.state.posts}/>
+          <LogoList onCompanyFilter={this.onCompanyFilter.bind(this)}/>
+          <FeedList posts={this.state.posts} filterByCompany={this.state.filterByCompany}/>
         </div>
       </div>
     );

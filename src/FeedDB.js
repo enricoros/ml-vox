@@ -54,8 +54,8 @@ const QFEEDS = [
     company: 'Google',
     comments: 'Brain, NO Magenta, etc.',
     name: 'Google Research Blog',
-    url: 'https://www.blogger.com/feeds/21224994/posts/default'
-    //url: 'https://www.blogger.com/feeds/21224994/posts/default/-/Machine%20Learning'
+    // url: 'https://www.blogger.com/feeds/21224994/posts/default'
+    url: 'https://www.blogger.com/feeds/21224994/posts/default/-/Machine%20Learning'
   },
   {
     id: 'g2',
