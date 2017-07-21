@@ -109,7 +109,7 @@ const Header = ({onRefreshClick, scale, onScaleChange}) =>
 const LogoList = ({onCompanyFilter}) =>
   <div className="LogoList">
     {Object.keys(LOGO_FILES).sort().map(company_name =>
-      <img src={LOGO_FILES[company_name]} key={company_name} alt="" data-company_name={company_name}
+      <img src={LOGO_FILES[company_name]} key={company_name} alt={company_name} data-company_name={company_name}
            onMouseEnter={e => onCompanyFilter(company_name, false)} onMouseLeave={e => onCompanyFilter(null, false)}
            onClick={e => onCompanyFilter(company_name, true)} style={{cursor: 'pointer'}}/>)}
   </div>;

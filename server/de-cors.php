@@ -50,6 +50,7 @@ $valid_requests = array(
     'https://caffe2.ai/feed.xml',
     'https://blogs.nvidia.com/blog/category/deep-learning/feed/',
     'http://www.ceva-dsp.com/ourblog/feed/',
+    'https://blog.openai.com/rss/',
     // 'example.com'
 );
 

@@ -9,7 +9,8 @@ const LOGO_FILES = {
   'Microsoft': 'logo-microsoft.png',
   'Facebook': 'logo-facebook.png',
   'NVIDIA': 'logo-nvidia.png',
-  'CEVA': 'logo-ceva.png'
+  'CEVA': 'logo-ceva.png',
+  'OpenAI': 'logo-openai.png'
 };
 
 const QFEEDS = [
@@ -111,6 +112,13 @@ const QFEEDS = [
     name: 'CEVA Experts Blog',
     url: 'http://www.ceva-dsp.com/ourblog/feed/',
     home: 'http://www.ceva-dsp.com/ourblog/'
+  },
+  {
+    id: 'oa',
+    company: 'OpenAI',
+    name: 'OpenAI Blog',
+    url: 'https://blog.openai.com/rss/',
+    home: 'https://blog.openai.com/'
   }
 ];
 
