@@ -7,7 +7,8 @@ const LOGO_FILES = {
   'Intel': 'logo-intel-nervana.png',
   'Microsoft': 'logo-microsoft.png',
   'Facebook': 'logo-facebook.png',
-  'NVIDIA': 'logo-nvidia.png'
+  'NVIDIA': 'logo-nvidia.png',
+  'CEVA': 'logo-ceva.png'
 };
 
 const QFEEDS = [
@@ -84,6 +85,12 @@ const QFEEDS = [
     company: 'NVIDIA',
     name: 'NVIDIA Deep Learning',
     url: 'https://blogs.nvidia.com/blog/category/deep-learning/feed/'
+  },
+  {
+    id: 'cc',
+    company: 'CEVA',
+    name: 'CEVA Experts Blog',
+    url: 'http://www.ceva-dsp.com/ourblog/feed/'
   }
 ];
 
