@@ -80,7 +80,7 @@ class FeedList extends Component {
       <hr/>
       <div className="Post TheEnd">
         <h3>&nbsp;</h3>
-        <h3>Only showing up to 6 weeks of posts.</h3>
+        <h3>Only showing up to 3 weeks. Everything else is old.</h3>
         <h3>Enjoy</h3>
         <h3>&nbsp;</h3>
       </div>
@@ -146,7 +146,7 @@ class App extends Component {
         posts = posts.concat(feed.posts);
       });
       // update the UI with sorted posts by time, newest on top, without posts older than 2 months
-      const recentEnough = Date.now() - 6 * 7 * 24 * 3600 * 1000;
+      const recentEnough = Date.now() - 3 * 7 * 24 * 3600 * 1000;
       const sortedPosts = posts.sort((a, b) => b.date - a.date).filter(p => p.date > recentEnough);
       this.setState({posts: sortedPosts});
     }));
