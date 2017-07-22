@@ -123,7 +123,7 @@ const QFEEDS = [
 ];
 
 // const LINKS = [
-//   'https://www.eff.org/ai/metrics'
+//   'https://www.eff.org/ai/metrics', 'http://aiweekly.co/
 // ];
 
 export {QFEEDS, LOGO_FILES};
