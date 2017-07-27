@@ -2,7 +2,6 @@
   "name": "ml-news-stream",
   "version": "0.1.0",
   "private": true,
-  "homepage": "/ml-news",
   "dependencies": {
     "bootstrap": "^3.3.7",
     "react": "^15.6.1",
