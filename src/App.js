@@ -95,7 +95,7 @@ const Header = ({onRefreshClick, scale, onScaleChange}) =>
       <h2>
         <Row>
           <Col md={8}>
-            AI/ML Leaders Voice
+            Machine Learning Leaders Voice
           </Col>
           <Col md={4} className="App-header-right">
             <Button onClick={onScaleChange} className="btn-transparent">{scale}</Button>
