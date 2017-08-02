@@ -38,7 +38,7 @@ const atomFindHtmlUrl = (atomUrls) => {
   return atomUrls;
 };
 
-const removeHtmlTags = (summary) => summary.replace(/<\/?[^>]+(>|$)/g, "");
+const removeHtmlTags = (summary) => summary.replace(/<\/?[^>]+(>|$)/g, "").replace('&nbsp;', ' ');
 
 const parseDate = (dateStr) => {
   let date = Date.parse(dateStr);
