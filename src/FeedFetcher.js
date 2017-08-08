@@ -189,15 +189,17 @@ const FeedFetcher = {
         item._author = removeHtmlTags(authorHtml).replace('Posted by ', '');
         item.description = removeHtmlTags(contentHtml);
       }
-      // patch for YouTube / content with media:group
+      // patch content with media:group
       if (val.hasOwnProperty('media:group')) {
         let valMediaGroup = v(val, 'media:group');
         if (item.description === "")
-          item.description = ellipsize(removeHtmlTags(v(valMediaGroup, 'media:description')), 350);
+          item.description = ellipsize(removeHtmlTags(v(valMediaGroup, 'media:description')), 180);
         if (item._thumbUrl === "")
           item._thumbUrl = v(v(valMediaGroup, 'media:thumbnail'), 'url');
       }
-
+      // patch for YouTube to get the Video ID
+      if (val.hasOwnProperty('yt:videoId'))
+        item._ytVideoId = v(val, 'yt:videoId');
       FeedFetcher.findUnknownKeys(val, [
         /* parsed */ 'title', 'link', 'published', 'summary', 'content', 'author', 'media:thumbnail',
         /* parsed youtube */ 'media:group',
@@ -212,4 +214,5 @@ const FeedFetcher = {
   },
 };
 
+export {ellipsize};
 export default FeedFetcher;

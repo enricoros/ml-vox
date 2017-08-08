@@ -8,6 +8,7 @@
     "react-bootstrap": "^0.31.2",
     "react-dom": "^15.6.1",
     "react-scripts": "1.0.10",
+    "react-youtube": "^7.4.0",
     "request": "^2.81.0",
     "xml2js": "^0.4.17"
   },

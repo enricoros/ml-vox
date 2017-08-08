@@ -4,9 +4,10 @@ import "./App.css";
 
 import React, {Component} from "react";
 import {Button, Clearfix, Col, Row} from "react-bootstrap";
+import YouTube from "react-youtube";
 
 import {LOGO_FILES, QFEEDS} from "./FeedDB";
-import FeedFetcher from "./FeedFetcher";
+import FeedFetcher, {ellipsize} from "./FeedFetcher";
 
 const colorize = (snippet, color) => <span style={{color: color}}>{snippet}</span>;
 
@@ -36,15 +37,16 @@ const Post = ({post}) =>
     <h2><a href={post.url}>{post.title}</a></h2>
     <div className="Content">
       <p>
-        <span className='Company'>
+        {!post._ytVideoId && <span className='Company'>
           {/*post.qf.company*/}
           <img src={LOGO_FILES[post.qf.company]} onClick={() => console.log(post)} alt={post.qf.company + ' logo'}/>
-        </span>
-        {post._thumbUrl && <span className="Thumbnail">
-          <img src={post._thumbUrl} alt="Post thumbnail"/>
         </span>}
-        <span>{(post.description || post.title).substring(0, 1000)}</span>
+        {post._thumbUrl && <span className="Thumbnail">
+          <img src={post._thumbUrl} alt="Thumbnail"/>
+        </span>}
+        <span>{ellipsize(post.description || post.title, 800)}</span>
       </p>
+      {post._ytVideoId && <YouTube videoId={post._ytVideoId}/>}
       <Clearfix/>
       <div className="Footer">
         <Row>
