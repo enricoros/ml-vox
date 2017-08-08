@@ -32,6 +32,14 @@ const humanDate = (dateTS) => {
   return prefix + date.toLocaleDateString().replace('/2017', '').replace('/', ' / ');
 };
 
+const YouTubeOpts = {
+  playerVars: {
+    controls: 1,
+    rel: 0,
+    showinfo: 0
+  }
+};
+
 const Post = ({post}) =>
   <div className="Post">
     <h2><a href={post.url}>{post.title}</a></h2>
@@ -45,8 +53,8 @@ const Post = ({post}) =>
           <img src={post._thumbUrl} alt="Thumbnail"/>
         </span>}
         <span>{ellipsize(post.description || post.title, 800)}</span>
+        {post._ytVideoId && <YouTube videoId={post._ytVideoId} opts={YouTubeOpts}/>}
       </p>
-      {post._ytVideoId && <YouTube videoId={post._ytVideoId}/>}
       <Clearfix/>
       <div className="Footer">
         <Row>

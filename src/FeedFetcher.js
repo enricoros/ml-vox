@@ -193,7 +193,7 @@ const FeedFetcher = {
       if (val.hasOwnProperty('media:group')) {
         let valMediaGroup = v(val, 'media:group');
         if (item.description === "")
-          item.description = ellipsize(removeHtmlTags(v(valMediaGroup, 'media:description')), 180);
+          item.description = ellipsize(removeHtmlTags(v(valMediaGroup, 'media:description')), 90);
         if (item._thumbUrl === "")
           item._thumbUrl = v(v(valMediaGroup, 'media:thumbnail'), 'url');
       }
