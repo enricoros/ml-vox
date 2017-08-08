@@ -130,6 +130,11 @@ class App extends Component {
 
   componentDidMount() {
     this.onRefreshClicked();
+    this.timerID = setInterval(() => this.onRefreshClicked(), 3600 * 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timerID);
   }
 
   onRefreshClicked() {
