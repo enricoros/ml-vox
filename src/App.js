@@ -78,7 +78,7 @@ class FeedPosts extends Component {
     const afterPosts = filteredPosts.filter(p => p.date < today);
     return <div>
       {todayPosts.length > 0 && <div>{todayPosts.map(p => <Post post={p} key={p.hash}/>)}</div>}
-      {todayPosts.length > 0 && <div><h3>&nbsp;</h3><Separator title="Yesterday and before"/><h3>&nbsp;</h3></div>}
+      {todayPosts.length > 0 && <div><h3>&nbsp;</h3><Separator title="Yesterday and earlier"/><h3>&nbsp;</h3></div>}
       {afterPosts.length > 0 && <div>{afterPosts.map(p => <Post post={p} key={p.hash}/>)}</div>}
       <hr/>
       <div className="Post TheEnd">

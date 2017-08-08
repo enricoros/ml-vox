@@ -38,6 +38,8 @@ const atomFindHtmlUrl = (atomUrls) => {
   return atomUrls;
 };
 
+const ellipsize = (str, len) => str.length > len ? str.substr(0, len - 2) + "…" : str;
+
 const removeHtmlTags = (summary) => summary
   .replace(/<\/?[^>]+(>|$)/g, "")
   .replace(/&nbsp;/g, " ")
@@ -162,7 +164,8 @@ const FeedFetcher = {
       /* parsed */ 'title', 'subtitle', 'entry',
       /* skipped */ 'author', 'category', 'generator', 'id', 'link', 'updated', 'openSearch:itemsPerPage',
       'openSearch:startIndex', 'openSearch:totalResults', 'xmlns', 'xmlns:openSearch', 'xmlns:gd',
-      'xmlns:georss', 'xmlns:blogger', 'xmlns:thr'
+      'xmlns:georss', 'xmlns:blogger', 'xmlns:thr',
+      /* skipped youtube */ 'xmlns:yt', 'xmlns:media', 'yt:channelId', 'published'
     ], url);
     for (let val of [].concat(jsonFeed.entry)) {
       const valContent = v(val, 'content');
@@ -186,9 +189,20 @@ const FeedFetcher = {
         item._author = removeHtmlTags(authorHtml).replace('Posted by ', '');
         item.description = removeHtmlTags(contentHtml);
       }
+      // patch for YouTube / content with media:group
+      if (val.hasOwnProperty('media:group')) {
+        let valMediaGroup = v(val, 'media:group');
+        if (item.description === "")
+          item.description = ellipsize(removeHtmlTags(v(valMediaGroup, 'media:description')), 350);
+        if (item._thumbUrl === "")
+          item._thumbUrl = v(v(valMediaGroup, 'media:thumbnail'), 'url');
+      }
+
       FeedFetcher.findUnknownKeys(val, [
         /* parsed */ 'title', 'link', 'published', 'summary', 'content', 'author', 'media:thumbnail',
-        /* skipped */ 'id', 'category', 'updated', 'gd:extendedProperty', 'thr:total'
+        /* parsed youtube */ 'media:group',
+        /* skipped */ 'id', 'category', 'updated', 'gd:extendedProperty', 'thr:total',
+        /* skipped youtube */ 'yt:videoId', 'yt:channelId'
       ], url);
       item.hash = hashForPost(item);
       feed.posts.push(item);

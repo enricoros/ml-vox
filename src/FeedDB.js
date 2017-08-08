@@ -10,7 +10,8 @@ const LOGO_FILES = {
   'Facebook': 'logo-facebook.png',
   'NVIDIA': 'logo-nvidia.png',
   'CEVA': 'logo-ceva.png',
-  'OpenAI': 'logo-openai.png'
+  'OpenAI': 'logo-openai.png',
+  'Two Minute Papers': 'logo-misc-two-minute-papers.png',
 };
 
 const QFEEDS = [
@@ -119,6 +120,13 @@ const QFEEDS = [
     name: 'OpenAI Blog',
     url: 'https://blog.openai.com/rss/',
     home: 'https://blog.openai.com/'
+  },
+  {
+    id: 'tmp',
+    company: 'Two Minute Papers',
+    name: 'Two Minute Papers',
+    url: 'https://www.youtube.com/feeds/videos.xml?channel_id=UCbfYPyITQ-7l4upoX8nvctg',
+    home: 'https://www.youtube.com/channel/UCbfYPyITQ-7l4upoX8nvctg'
   }
 ];
 
