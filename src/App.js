@@ -93,12 +93,13 @@ const Header = ({onRefreshClick, scale, onScaleChange}) =>
     </div>
   </div>;
 
-const LogoList = ({onCompanyFilter}) =>
+const LogoList = ({filterCompany, onCompanyFilter}) =>
   <div className="LogoList">
     {Object.keys(LOGO_FILES).sort().map(company_name =>
       <img src={LOGO_FILES[company_name]} key={company_name} alt={company_name} data-company_name={company_name}
            onMouseEnter={e => onCompanyFilter(company_name, false)} onMouseLeave={e => onCompanyFilter(null, false)}
-           onClick={e => onCompanyFilter(company_name, true)} style={{cursor: 'pointer'}}/>)}
+           onClick={e => onCompanyFilter(company_name, true)}
+           className={filterCompany === company_name ? 'active' : ''}/>)}
   </div>;
 
 class App extends Component {
@@ -166,10 +167,10 @@ class App extends Component {
   render() {
     return (
       <div className={'App-' + this.state.scale}>
-        <Header onRefreshClick={this.onRefreshClicked.bind(this)} scale={this.state.scale}
+        <Header scale={this.state.scale} onRefreshClick={this.onRefreshClicked.bind(this)}
                 onScaleChange={this.onScaleChange.bind(this)}/>
         <div className='container App-Body'>
-          <LogoList onCompanyFilter={this.onCompanyFilter.bind(this)}/>
+          <LogoList filterCompany={this.state.filterByCompany} onCompanyFilter={this.onCompanyFilter.bind(this)}/>
           <FeedPosts posts={this.state.posts} filterByCompany={this.state.filterByCompany}/>
         </div>
       </div>

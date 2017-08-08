@@ -50,9 +50,14 @@ body {
 }
 
 .LogoList img {
-  max-height: 30px;
-  line-height: 30px;
+  max-height: 32px;
+  line-height: 32px;
   padding: 5px 20px;
+  cursor: pointer;
+}
+
+.LogoList img.active {
+  background: #eee;
 }
 
 .Separator {
@@ -106,7 +111,7 @@ body {
   font-size: 22px;
   line-height: 22px;
   text-align: center;
-  background: #eee;
+  background: #f3f3f3;
 }
 
 .Post .Content .Company > img {
