@@ -40,6 +40,28 @@ const YouTubeOpts = {
   }
 };
 
+class YouTubeWrapper extends Component {
+  // NOTE: this could use state for having an immediate display of the player, without reloading
+  static onToggle(e, nextState) {
+    e.preventDefault();
+    localStorage.setItem('disable_youtube_player', nextState); // inherit globally
+    window.location.reload();
+  }
+
+  render() {
+    const isDisabled = localStorage.getItem('disable_youtube_player') === 'true';
+    if (isDisabled)
+      return <div><Button onClick={(e) => YouTubeWrapper.onToggle(e, false)}> ► Enable YouTube</Button></div>;
+    return (
+      <div>
+        <YouTube videoId={this.props.videoId} opts={YouTubeOpts}/>
+        <br/>
+        <a href="#" onClick={(e) => YouTubeWrapper.onToggle(e, true)}>Disable YouTube.</a>
+      </div>
+    );
+  }
+}
+
 const Post = ({post}) =>
   <div className="Post">
     <h2>{post.qf.title_prefix} <a href={post.url}>{post.title}</a></h2>
@@ -53,7 +75,7 @@ const Post = ({post}) =>
           <img src={post._thumbUrl} alt="Thumbnail"/>
         </span>}
         <span>{ellipsize(post.description || post.title, 800)}</span>
-        {post._ytVideoId && <YouTube videoId={post._ytVideoId} opts={YouTubeOpts}/>}
+        {post._ytVideoId && <YouTubeWrapper videoId={post._ytVideoId}/>}
       </p>
       <Clearfix/>
       <div className="Footer">

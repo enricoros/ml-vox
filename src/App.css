@@ -10,7 +10,7 @@ body {
 
 .App-header {
   font-family: 'Noto Serif', serif;
-  background-color: #263238;
+  background-color: rgba(38, 50, 56, 1);
   padding: 20px;
   color: white;
   position: fixed;
