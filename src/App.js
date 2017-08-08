@@ -17,6 +17,8 @@ const humanDate = (dateTS) => {
     return colorize('just now.', 'darkgreen');
   if (elapsed < 90 * 60 * 1000)
     return colorize('one hour ago.', 'darkgreen');
+  if (elapsed < 8 * 3600 * 1000)
+    return colorize('few hours ago.', 'darkgreen');
   if (elapsed < 1.2 * 24 * 3600 * 1000)
     return colorize('today.', 'darkgreen');
   if (elapsed < 3 * 24 * 3600 * 1000)
