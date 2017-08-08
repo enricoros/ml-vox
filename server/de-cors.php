@@ -38,6 +38,7 @@ define('CSAJAX_DEBUG', false);
  * A set of valid cross domain requests
  */
 $valid_requests = array(
+    'https://developer.qualcomm.com/rssfeed',
     'http://www.qualcommlife.com/blog/feed/rss/our-blog',
     'https://aws.amazon.com/blogs/ai/feed/',
     'https://machinelearning.apple.com/feed.xml',
