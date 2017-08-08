@@ -49,6 +49,19 @@ const parseDate = (dateStr) => {
   return date;
 };
 
+const stringHash = (str) => {
+  if (str.length === 0) return 0;
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    let chr = str.charCodeAt(i);
+    hash = ((hash << 5) - hash) + chr;
+    hash |= 0; // Convert to 32bit integer
+  }
+  return hash;
+};
+
+const hashForPost = (p) => stringHash(p.url.length ? p.url : p.qf.id + p.date);
+
 const FeedFetcher = {
 
   deCORS: url => "https://services.enricoros.com/de-cors.php?csurl=" + encodeURIComponent(url),
@@ -83,13 +96,6 @@ const FeedFetcher = {
     });
   },
 
-  findUnknownKeys(obj, known_keys, debugUrl) {
-    // print unsupported properties, as a promise for better parsing
-    for (let key of Object.keys(obj))
-      if (known_keys.indexOf(key) === -1)
-        console.log('FeedFetcher: non-parsed property \'' + key + ' = ' + JSON.stringify(obj[key]) + ', on: ' + debugUrl);
-  },
-
   parseRss: (jsonRss, url) => {
     //console.log(jsonRss);
     const channel = v(jsonRss, 'channel');
@@ -103,7 +109,7 @@ const FeedFetcher = {
     FeedFetcher.findUnknownKeys(channel, [
       /* parsed */ 'title', 'description', 'link', 'item',
       /* ignored */ 'language', 'generator', 'atom:link', 'lastBuildDate', 'sy:updatePeriod',
-      'sy:updateFrequency', 'pubDate', 'image', 'webMaster'
+      'sy:updateFrequency', 'ttl', 'pubDate', 'image', 'webMaster'
     ], url);
     for (let val of [].concat(channel.item)) {
       const item = {
@@ -111,6 +117,7 @@ const FeedFetcher = {
         description: removeHtmlTags(v(val, 'description')),
         url: v(val, 'link'),
         date: parseDate(v(val, 'pubDate')),
+        hash: undefined,
         _author: v(val, 'dc:creator'),
         _id: v(val, 'guid')['_'],
         _thumbUrl: v(v(val, 'media:content'), 'url'),
@@ -120,10 +127,18 @@ const FeedFetcher = {
         /* parsed */ 'title', 'description', 'link', 'pubDate', 'guid', 'media:content',
         /* skipped */ 'category', 'dc:creator', 'content:encoded', 'comments', 'wfw:commentRss', 'slash:comments', 'atom:updated'
       ], url);
+      item.hash = hashForPost(item);
       feed.posts.push(item);
     }
     delete feed._debug_source['item'];
     return feed;
+  },
+
+  findUnknownKeys(obj, known_keys, debugUrl) {
+    // print unsupported properties, as a promise for better parsing
+    for (let key of Object.keys(obj))
+      if (known_keys.indexOf(key) === -1)
+        console.log('FeedFetcher: non-parsed property \'' + key + ' = ' + JSON.stringify(obj[key]) + ', on: ' + debugUrl);
   },
 
   parseFeed: (jsonFeed, url) => {
@@ -148,6 +163,7 @@ const FeedFetcher = {
         description: removeHtmlTags(atomHtmlString(v(val, 'summary') || valContent)),
         url: atomFindHtmlUrl(val['link']),
         date: parseDate(v(val, 'published')),
+        hash: undefined,
         _author: v(v(val, 'author'), 'name'),
         _id: v(val, 'id'),
         _thumbUrl: v(v(val, 'media:thumbnail'), 'url'),
@@ -166,6 +182,7 @@ const FeedFetcher = {
         /* parsed */ 'title', 'link', 'published', 'summary', 'content', 'author', 'media:thumbnail',
         /* skipped */ 'id', 'category', 'updated', 'gd:extendedProperty', 'thr:total'
       ], url);
+      item.hash = hashForPost(item);
       feed.posts.push(item);
     }
     delete feed._debug_source['entry'];

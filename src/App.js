@@ -55,19 +55,6 @@ const Post = ({post}) =>
 
 const Separator = ({title}) => <div className="Separator">{title && <span>{title}</span>}</div>;
 
-const stringHash = (str) => {
-  if (str.length === 0) return 0;
-  let hash = 0;
-  for (let i = 0; i < str.length; i++) {
-    let chr = str.charCodeAt(i);
-    hash = ((hash << 5) - hash) + chr;
-    hash |= 0; // Convert to 32bit integer
-  }
-  return hash;
-};
-
-const hashForPost = (p) => stringHash(p.qf.id + p.date);
-
 class FeedPosts extends Component {
   render() {
     const today = Date.now() - 1.2 * 24 * 3600 * 1000;
@@ -75,9 +62,9 @@ class FeedPosts extends Component {
     const todayPosts = filteredPosts.filter(p => p.date >= today);
     const afterPosts = filteredPosts.filter(p => p.date < today);
     return <div>
-      {todayPosts.length > 0 && <div>{todayPosts.map(p => <Post post={p} key={hashForPost(p)}/>)}</div>}
+      {todayPosts.length > 0 && <div>{todayPosts.map(p => <Post post={p} key={p.hash}/>)}</div>}
       {todayPosts.length > 0 && <div><h3>&nbsp;</h3><Separator title="Yesterday and before"/><h3>&nbsp;</h3></div>}
-      {afterPosts.length > 0 && <div>{afterPosts.map(p => <Post post={p} key={hashForPost(p)}/>)}</div>}
+      {afterPosts.length > 0 && <div>{afterPosts.map(p => <Post post={p} key={p.hash}/>)}</div>}
       <hr/>
       <div className="Post TheEnd">
         <h3>&nbsp;</h3>
