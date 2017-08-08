@@ -58,7 +58,22 @@ const Separator = ({title}) => <div className="Separator">{title && <span>{title
 class FeedPosts extends Component {
   render() {
     const today = Date.now() - 1.2 * 24 * 3600 * 1000;
+    // filter by company
     let filteredPosts = this.props.posts.filter(p => this.props.filterByCompany ? p.qf.company === this.props.filterByCompany : true);
+    // filter by recent (or at least 4 messages)
+    let filteredMessage = "";
+    if (!filteredPosts.length) {
+      filteredMessage = "Loading...";
+    } else {
+      if (filteredPosts.length > 4) {
+        const recentEnough = Date.now() - 4 * 7 * 24 * 3600 * 1000;
+        filteredPosts = filteredPosts.filter(p => p.date > recentEnough);
+        filteredMessage = "Only showing up to 4 weeks.";
+      } else
+        filteredMessage = "Only showing the last " + filteredPosts.length + " messages.";
+      filteredMessage += " Everything else is old.";
+    }
+    // separate Today's from formers messages
     const todayPosts = filteredPosts.filter(p => p.date >= today);
     const afterPosts = filteredPosts.filter(p => p.date < today);
     return <div>
@@ -68,7 +83,7 @@ class FeedPosts extends Component {
       <hr/>
       <div className="Post TheEnd">
         <h3>&nbsp;</h3>
-        <h3>Only showing up to 4 weeks. Everything else is old.</h3>
+        <h3>{filteredMessage}</h3>
         <h3>Enjoy</h3>
         <h3>&nbsp;</h3>
       </div>
@@ -134,10 +149,8 @@ class App extends Component {
       Object.keys(this.aggregatedFeeds).map(qfid => this.aggregatedFeeds[qfid]).forEach(feed => {
         posts = posts.concat(feed.posts);
       });
-      // update the UI with sorted posts by time, newest on top, without posts older than 2 months
-      const recentEnough = Date.now() - 4 * 7 * 24 * 3600 * 1000;
-      const sortedPosts = posts.filter(p => p.date > recentEnough).sort((a, b) => b.date - a.date);
-      this.setState({posts: sortedPosts});
+      // update the UI with sorted posts by time, newest on top
+      this.setState({posts: posts.sort((a, b) => b.date - a.date)});
     }));
   }
 
