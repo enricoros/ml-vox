@@ -51,6 +51,7 @@ $valid_requests = array(
     'https://blogs.nvidia.com/blog/category/deep-learning/feed/',
     'http://www.ceva-dsp.com/ourblog/feed/',
     'https://blog.openai.com/rss/',
+    'https://www.youtube.com/feeds/videos.xml?channel_id=UCbfYPyITQ-7l4upoX8nvctg',
     // 'example.com'
 );
 
