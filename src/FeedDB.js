@@ -126,7 +126,8 @@ const QFEEDS = [
     company: 'Two Minute Papers',
     name: 'Two Minute Papers',
     url: 'https://www.youtube.com/feeds/videos.xml?channel_id=UCbfYPyITQ-7l4upoX8nvctg',
-    home: 'https://www.youtube.com/channel/UCbfYPyITQ-7l4upoX8nvctg'
+    home: 'https://www.youtube.com/channel/UCbfYPyITQ-7l4upoX8nvctg',
+    title_prefix: '(learn something)'
   }
 ];
 

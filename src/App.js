@@ -42,7 +42,7 @@ const YouTubeOpts = {
 
 const Post = ({post}) =>
   <div className="Post">
-    <h2><a href={post.url}>{post.title}</a></h2>
+    <h2>{post.qf.title_prefix} <a href={post.url}>{post.title}</a></h2>
     <div className="Content">
       <p>
         {!post._ytVideoId && <span className='Company'>
