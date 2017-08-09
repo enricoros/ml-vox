@@ -90,7 +90,7 @@ const FEEDS = [
     id: 'mm',
     company: 'Microsoft',
     name: 'Microsoft Next',
-    url: 'https://blogs.microsoft.com/next/feed/',
+    url: 'https://blogs.microsoft.com/ai/feed/',
     home: 'https://blogs.microsoft.com/next/'
   },
   {

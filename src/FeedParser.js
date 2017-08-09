@@ -87,8 +87,8 @@ const FeedParser = {
       followRedirect: true
     }, (error, response, xmlData) => {
       if (error || !response || response.statusCode !== 200) {
-        console.log(response);
         callback('Fetch error from url: ' + url, null);
+        console.log(response);
         return;
       }
       const P = new xml2js.Parser({trim: false, normalize: true, mergeAttrs: true});
