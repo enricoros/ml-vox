@@ -64,7 +64,7 @@ class YouTubeWrapper extends Component {
 
 const Post = ({post}) =>
   <div className="Post">
-    <h2>{post.feed.spec.title_prefix} <a href={post.url}>{post.title}</a></h2>
+    <h2><span className="Prefix">{post.feed.spec.title_prefix}</span> <a href={post.url}>{post.title}</a></h2>
     <div className="Content">
       <p>
         {!post._ytVideoId && <span className='Company'>
@@ -76,8 +76,8 @@ const Post = ({post}) =>
           <img src={post._thumbUrl} alt="Thumbnail"/>
         </span>}
         <span>{ellipsize(post.description || post.title, 800)}</span>
-        {post._ytVideoId && <YouTubeWrapper videoId={post._ytVideoId}/>}
       </p>
+      {post._ytVideoId && <YouTubeWrapper videoId={post._ytVideoId}/>}
       <Clearfix/>
       <div className="Footer">
         <Row>
