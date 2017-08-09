@@ -6,8 +6,8 @@ import React, {Component} from "react";
 import {Button, Clearfix, Col, Row} from "react-bootstrap";
 import YouTube from "react-youtube";
 
-import {LOGO_FILES, QFEEDS} from "./FeedDB";
-import FeedFetcher, {ellipsize} from "./FeedFetcher";
+import {FEEDS, LOGO_FILES} from "./Feeds";
+import FeedParser, {ellipsize} from "./FeedParser";
 
 const colorize = (snippet, color) => <span style={{color: color}}>{snippet}</span>;
 
@@ -64,12 +64,13 @@ class YouTubeWrapper extends Component {
 
 const Post = ({post}) =>
   <div className="Post">
-    <h2>{post.qf.title_prefix} <a href={post.url}>{post.title}</a></h2>
+    <h2>{post.feed.spec.title_prefix} <a href={post.url}>{post.title}</a></h2>
     <div className="Content">
       <p>
         {!post._ytVideoId && <span className='Company'>
-          {/*post.qf.company*/}
-          <img src={LOGO_FILES[post.qf.company]} onClick={() => console.log(post)} alt={post.qf.company + ' logo'}/>
+          {/*post.feed.spec.company*/ /* Company Logo on the left */}
+          <img src={LOGO_FILES[post.feed.spec.company]} onClick={() => console.log(post)}
+               alt={post.feed.spec.company + ' logo'}/>
         </span>}
         {post._thumbUrl && <span className="Thumbnail">
           <img src={post._thumbUrl} alt="Thumbnail"/>
@@ -81,7 +82,7 @@ const Post = ({post}) =>
       <div className="Footer">
         <Row>
           <Col md={8} style={{textAlign: 'left'}}>- {post._author || post.feed.title}, {humanDate(post.date)}</Col>
-          <Col md={4} style={{textAlign: 'right'}}><a href={post.qf.home}>- {post.qf.name}</a></Col>
+          <Col md={4} style={{textAlign: 'right'}}><a href={post.feed.spec.home}>- {post.feed.spec.name}</a></Col>
         </Row>
       </div>
     </div>
@@ -93,7 +94,7 @@ class FeedPosts extends Component {
   render() {
     const today = Date.now() - 1.2 * 24 * 3600 * 1000;
     // filter by company
-    let filteredPosts = this.props.posts.filter(p => this.props.filterByCompany ? p.qf.company === this.props.filterByCompany : true);
+    let filteredPosts = this.props.posts.filter(p => this.props.filterByCompany ? p.feed.spec.company === this.props.filterByCompany : true);
     // filter by recent (or at least 4 messages)
     let filteredMessage = "";
     if (!filteredPosts.length) {
@@ -152,8 +153,9 @@ const LogoList = ({filterCompany, onCompanyFilter}) =>
   </div>;
 
 class App extends Component {
-  aggregatedFeeds = {};
+  downloadedFeeds = {};
   state = {
+    errors: [],
     filterByCompany: null,
     filterSticky: false,
     posts: [],
@@ -170,27 +172,32 @@ class App extends Component {
   }
 
   onRefreshClicked() {
-    QFEEDS.forEach(qf => FeedFetcher.loadAndParse(qf.url, (err, feed) => {
+    FEEDS.forEach(spec => FeedParser.loadAndParse(spec.url, (err, feed) => {
       if (err) {
-        console.error("Error while fetching " + qf.name + ", on: " + qf.url);
+        console.error("Error while fetching " + spec.name + ", on: " + spec.url);
         console.log(err);
-        return
+        // TODO: add capture of errors
+        return;
       }
+      // add the original spec to the new feed
+      feed.spec = spec;
       // update the static global contents for this feed
-      this.aggregatedFeeds[qf.id] = feed;
+      this.downloadedFeeds[spec.id] = feed;
       // point every post to the containing feed, and to our internal feed DB entry
-      feed.posts.forEach(i => {
-        i['feed'] = feed;
-        i['qf'] = qf;
-      });
-      // re-make the full posts list
-      let posts = [];
-      Object.keys(this.aggregatedFeeds).map(qfid => this.aggregatedFeeds[qfid]).forEach(feed => {
-        posts = posts.concat(feed.posts);
-      });
-      // update the UI with sorted posts by time, newest on top
-      this.setState({posts: posts.sort((a, b) => b.date - a.date)});
+      feed.posts.forEach(post => post['feed'] = feed);
+      // regen the posts list
+      this.updateFeedPosts();
     }));
+  }
+
+  updateFeedPosts() {
+    // re-make the full posts list
+    let posts = [];
+    Object.keys(this.downloadedFeeds).map(feedId => this.downloadedFeeds[feedId]).forEach(feed => {
+      posts = posts.concat(feed.posts);
+    });
+    // update the UI with sorted posts by time, newest on top
+    this.setState({posts: posts.sort((a, b) => b.date - a.date)});
   }
 
   onScaleChange() {

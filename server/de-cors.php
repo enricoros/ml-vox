@@ -47,6 +47,7 @@ $valid_requests = array(
     'https://deepmind.com/blog/feed/basic/',
     'https://magenta.tensorflow.org/feed.xml',
     'https://www.intelnervana.com/feed/',
+    'https://blogs.microsoft.com/ai/feed/',
     'https://blogs.microsoft.com/next/feed/',
     'https://caffe2.ai/feed.xml',
     'https://blogs.nvidia.com/blog/category/deep-learning/feed/',

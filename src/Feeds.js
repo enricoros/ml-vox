@@ -14,7 +14,7 @@ const LOGO_FILES = {
   'Two Minute Papers': 'logo-misc-two-minute-papers.png',
 };
 
-const QFEEDS = [
+const FEEDS = [
   // {
   //   id: 'q1',
   //   company: 'Qualcomm',
@@ -135,4 +135,4 @@ const QFEEDS = [
 //   'https://www.eff.org/ai/metrics', 'http://aiweekly.co/
 // ];
 
-export {QFEEDS, LOGO_FILES};
+export {FEEDS, LOGO_FILES};

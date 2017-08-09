@@ -7,7 +7,7 @@ const v = (container, key) => {
     return '';
   if (Array.isArray(value)) {
     if (value.length > 1)
-      console.error('FeedFetcher: missing ' + (value.length - 1) + ' values from property: ' + key);
+      console.error('FeedParser: missing ' + (value.length - 1) + ' values from property: ' + key);
     return value[0];
   }
   return value;
@@ -17,7 +17,7 @@ const atomHtmlString = (str) => {
   if (typeof str === "object") {
     const strType = v(str, 'type');
     if (strType !== "html" && strType !== "text")
-      console.error('FeedFetcher: Atom type is not html/text, but ' + v(str, 'type'));
+      console.error('FeedParser: Atom type is not html/text, but ' + v(str, 'type'));
     return str['_'];
   }
   return str;
@@ -53,7 +53,7 @@ const removeHtmlTags = (summary) => summary
 const parseDate = (dateStr) => {
   let date = Date.parse(dateStr);
   if (isNaN(date)) {
-    console.error('FeedFetcher: error parsing date: ' + dateStr);
+    console.error('FeedParser: error parsing date: ' + dateStr);
     return null;
   }
   return date;
@@ -70,15 +70,15 @@ const stringHash = (str) => {
   return hash;
 };
 
-const hashForPost = (p) => stringHash(p.url.length ? p.url : p.qf.id + p.date);
+const hashForPost = (p) => stringHash(p.url.length ? p.url : p.title + p.date);
 
-const FeedFetcher = {
+const FeedParser = {
 
   deCORS: url => "https://services.enricoros.com/de-cors.php?csurl=" + encodeURIComponent(url),
 
   loadAndParse: (url, callback) => {
     request({
-      url: FeedFetcher.deCORS(url),
+      url: FeedParser.deCORS(url),
       headers: {
         'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.19 Safari/537.36'
         // accept: 'text/html,application/xhtml+xml'
@@ -97,9 +97,9 @@ const FeedFetcher = {
         if (err || !jsonData)
           callback('Error parsing data from: ' + url, null);
         else if (jsonData.hasOwnProperty('rss'))
-          callback(null, FeedFetcher.parseRss(jsonData['rss'], url));
+          callback(null, FeedParser.parseRss(jsonData['rss'], url));
         else if (jsonData.hasOwnProperty('feed'))
-          callback(null, FeedFetcher.parseFeed(jsonData['feed'], url));
+          callback(null, FeedParser.parseFeed(jsonData['feed'], url));
         else
           callback('Format unsupported for: ' + url, null);
       });
@@ -116,7 +116,7 @@ const FeedFetcher = {
       posts: [],
       _debug_source: channel
     };
-    FeedFetcher.findUnknownKeys(channel, [
+    FeedParser.findUnknownKeys(channel, [
       /* parsed */ 'title', 'description', 'link', 'item',
       /* ignored */ 'language', 'generator', 'atom:link', 'lastBuildDate', 'sy:updatePeriod',
       'sy:updateFrequency', 'ttl', 'pubDate', 'image', 'webMaster'
@@ -133,7 +133,7 @@ const FeedFetcher = {
         _thumbUrl: v(v(val, 'media:content'), 'url'),
         _debug_source: val
       };
-      FeedFetcher.findUnknownKeys(val, [
+      FeedParser.findUnknownKeys(val, [
         /* parsed */ 'title', 'description', 'link', 'pubDate', 'guid', 'media:content',
         /* skipped */ 'category', 'dc:creator', 'content:encoded', 'comments', 'wfw:commentRss', 'slash:comments', 'atom:updated'
       ], url);
@@ -148,7 +148,7 @@ const FeedFetcher = {
     // print unsupported properties, as a promise for better parsing
     for (let key of Object.keys(obj))
       if (known_keys.indexOf(key) === -1)
-        console.log('FeedFetcher: non-parsed property \'' + key + ' = ' + JSON.stringify(obj[key]) + ', on: ' + debugUrl);
+        console.log('FeedParser: non-parsed property \'' + key + ' = ' + JSON.stringify(obj[key]) + ', on: ' + debugUrl);
   },
 
   parseFeed: (jsonFeed, url) => {
@@ -160,7 +160,7 @@ const FeedFetcher = {
       posts: [],
       _debug_source: jsonFeed
     };
-    FeedFetcher.findUnknownKeys(jsonFeed, [
+    FeedParser.findUnknownKeys(jsonFeed, [
       /* parsed */ 'title', 'subtitle', 'entry',
       /* skipped */ 'author', 'category', 'generator', 'id', 'link', 'updated', 'openSearch:itemsPerPage',
       'openSearch:startIndex', 'openSearch:totalResults', 'xmlns', 'xmlns:openSearch', 'xmlns:gd',
@@ -200,7 +200,7 @@ const FeedFetcher = {
       // patch for YouTube to get the Video ID
       if (val.hasOwnProperty('yt:videoId'))
         item._ytVideoId = v(val, 'yt:videoId');
-      FeedFetcher.findUnknownKeys(val, [
+      FeedParser.findUnknownKeys(val, [
         /* parsed */ 'title', 'link', 'published', 'summary', 'content', 'author', 'media:thumbnail',
         /* parsed youtube */ 'media:group',
         /* skipped */ 'id', 'category', 'updated', 'gd:extendedProperty', 'thr:total',
@@ -215,4 +215,4 @@ const FeedFetcher = {
 };
 
 export {ellipsize};
-export default FeedFetcher;
+export default FeedParser;
