@@ -13,7 +13,7 @@ body {
   background-color: rgba(38, 50, 56, 1);
   padding: 20px;
   color: white;
-  position: fixed;
+  /*position: fixed;*/
   top: 0;
   left: 0;
   right: 0;
@@ -40,7 +40,7 @@ body {
 }
 
 .App-Body {
-  margin-top: 108px;
+  /*margin-top: 108px;*/
 }
 
 .LogoList {

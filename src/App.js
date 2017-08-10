@@ -126,16 +126,20 @@ class FeedPosts extends Component {
   }
 }
 
-const Header = ({onRefreshClick, scale, onScaleChange}) =>
+const Header = ({onRefreshClick, scale, onScaleChange, onFeedChange}) =>
   <div className="App-header">
     <div className="container">
       <h2>
         <Row>
-          <Col md={8}>
+          <Col sm={8} smHidden xsHidden>
             Machine Learning Leaders Voice
           </Col>
-          <Col md={4} className="App-header-right">
+          <Col sm={8} mdHidden lgHidden>
+            ML Leaders Voice
+          </Col>
+          <Col sm={4} className="App-header-right" xsHidden>
             <Button onClick={onScaleChange} className="btn-transparent">{scale}</Button>
+            {/*<Button onClick={onFeedChange} className="btn-transparent">Feeds</Button>*/}
             <Button onClick={onRefreshClick} bsStyle="primary">Refresh</Button>
           </Col>
         </Row>
