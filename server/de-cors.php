@@ -54,6 +54,7 @@ $valid_requests = array(
     'http://www.ceva-dsp.com/ourblog/feed/',
     'https://blog.openai.com/rss/',
     'https://www.youtube.com/feeds/videos.xml',
+    'http://blog.otoro.net/feed.xml',
     // 'example.com'
 );
 

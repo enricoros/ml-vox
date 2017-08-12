@@ -12,6 +12,7 @@ const LOGO_FILES = {
   'CEVA': 'logo-ceva.png',
   'OpenAI': 'logo-openai.png',
   'Two Minute Papers': 'logo-misc-two-minute-papers.png',
+  'Otoro Blog': 'logo-misc-otoro.png',
 };
 
 const FEEDS = [
@@ -121,6 +122,7 @@ const FEEDS = [
     url: 'https://blog.openai.com/rss/',
     home: 'https://blog.openai.com/'
   },
+
   {
     id: 'tmp',
     company: 'Two Minute Papers',
@@ -128,6 +130,14 @@ const FEEDS = [
     url: 'https://www.youtube.com/feeds/videos.xml?channel_id=UCbfYPyITQ-7l4upoX8nvctg',
     home: 'https://www.youtube.com/channel/UCbfYPyITQ-7l4upoX8nvctg',
     title_prefix: '(learn something)'
+  },
+  {
+    id: 'oto',
+    company: 'Otoro',
+    name: 'Otoro Blog',
+    url: 'http://blog.otoro.net/feed.xml',
+    home: 'http://blog.otoro.net/',
+    title_prefix: '(ml+design)'
   }
 ];
 
