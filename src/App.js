@@ -92,7 +92,7 @@ const Separator = ({title}) => <div className="Separator">{title && <span>{title
 
 class FeedPosts extends Component {
   render() {
-    const today = Date.now() - 1.2 * 24 * 3600 * 1000;
+    const today = Date.now() - 1.4 * 24 * 3600 * 1000;
     // filter by company
     let filteredPosts = this.props.posts.filter(p => this.props.filterByCompany ? p.feed.spec.company === this.props.filterByCompany : true);
     // filter by recent (or at least 4 messages)
