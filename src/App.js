@@ -156,6 +156,9 @@ const LogoList = ({filterCompany, onCompanyFilter}) =>
            className={filterCompany === company_name ? 'active' : ''}/>)}
   </div>;
 
+// To be added later, when we talk about Routes in this app
+// const NewsFeedApp = (props) => <div/>;
+
 class App extends Component {
   downloadedFeeds = {};
   state = {
