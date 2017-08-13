@@ -11,12 +11,21 @@ class NNArtCanvas extends Component {
   numLayers = 10; // [0...7] 3
   z1Scale = 100; // [1 ... 1000] 100
   z2Scale = 100; // [1 ... 1000] 100
+  isSupported = true;
 
   componentDidMount() {
     // apply CPPN to the canvas; the canvas is resized to the texture size, but the page size is governed
     // independently by the CSS style (see .NN-Art-Canvas in the css)
     const inferenceCanvas = this.refs['art-canvas-1'];
-    this.cppn = new CPPN(inferenceCanvas);
+    if (!inferenceCanvas)
+      return;
+    try {
+      this.cppn = new CPPN(inferenceCanvas);
+    } catch (e) {
+      this.isSupported = false;
+      inferenceCanvas.style.display = 'none';
+      return;
+    }
 
     this.cppn.setColorMode(this.colorMode);
     this.cppn.setActivationFunction(this.activationFunction);
@@ -34,7 +43,7 @@ class NNArtCanvas extends Component {
   }
 
   render() {
-    return <canvas className="NN-Art-Canvas" ref="art-canvas-1"/>;
+    return this.isSupported ? <canvas className="NN-Art-Canvas" ref="art-canvas-1"/> : <span/>;
   }
 }
 
