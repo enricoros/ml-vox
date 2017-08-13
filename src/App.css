@@ -8,16 +8,27 @@ body {
   font-family: sans-serif;
 }
 
+.App-header-container {
+  position: relative;
+  color: white;
+  background-color: #263238;
+}
+
+.App-header-container .NN-Art-Canvas {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0.2;
+}
+
+.App-Small .App-header-container .NN-Art-Canvas {
+  position: fixed;
+}
+
 .App-header {
   font-family: 'Noto Serif', serif;
-  background-color: #263238;
   padding: 20px;
-  color: white;
-  /*position: fixed;*/
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1;
+  z-index: 2;
 }
 
 .App-header h2 {

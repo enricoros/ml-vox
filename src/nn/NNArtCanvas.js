@@ -1,13 +1,13 @@
 import React, {Component} from "react";
 import {CPPN} from './cppn';
 
-const MAT_WIDTH = 10;
+const MAT_WIDTH = 30;
 const WEIGHTS_STDEV = .6;
 
 class NNArtCanvas extends Component {
   cppn = undefined;
   colorMode = 'bw';
-  activationFunction = 'tanh';
+  activationFunction = 'relu';
   numLayers = 10; // [0...7] 3
   z1Scale = 100; // [1 ... 1000] 100
   z2Scale = 100; // [1 ... 1000] 100

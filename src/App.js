@@ -8,6 +8,7 @@ import YouTube from "react-youtube";
 
 import {FEEDS, LOGO_FILES} from "./Feeds";
 import FeedParser, {ellipsize} from "./FeedParser";
+import NNArtCanvas from "./nn/NNArtCanvas";
 
 const colorize = (snippet, color) => <span style={{color: color}}>{snippet}</span>;
 
@@ -127,23 +128,26 @@ class FeedPosts extends Component {
 }
 
 const Header = ({onRefreshClick, scale, onScaleChange, onFeedChange}) =>
-  <div className="App-header">
-    <div className="container">
-      <h2>
-        <Row>
-          <Col sm={8} smHidden xsHidden>
-            Machine Learning Leaders Voice
-          </Col>
-          <Col sm={8} mdHidden lgHidden>
-            ML Leaders Voice
-          </Col>
-          <Col sm={4} className="App-header-right" xsHidden>
-            <Button onClick={onScaleChange} className="btn-transparent">{scale}</Button>
-            {/*<Button onClick={onFeedChange} className="btn-transparent">Feeds</Button>*/}
-            <Button onClick={onRefreshClick} bsStyle="primary">Refresh</Button>
-          </Col>
-        </Row>
-      </h2>
+  <div className="App-header-container">
+    <NNArtCanvas/>
+    <div className="App-header">
+      <div className="container">
+        <h2>
+          <Row>
+            <Col sm={8} smHidden xsHidden>
+              Machine Learning Leaders Voice
+            </Col>
+            <Col sm={8} mdHidden lgHidden>
+              ML Leaders Voice
+            </Col>
+            <Col sm={4} className="App-header-right" xsHidden>
+              <Button onClick={onScaleChange} className="btn-transparent">{scale}</Button>
+              {/*<Button onClick={onFeedChange} className="btn-transparent">Feeds</Button>*/}
+              <Button onClick={onRefreshClick} bsStyle="primary">Refresh</Button>
+            </Col>
+          </Row>
+        </h2>
+      </div>
     </div>
   </div>;
 
