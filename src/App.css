@@ -10,7 +10,7 @@ body {
 
 .App-header {
   font-family: 'Noto Serif', serif;
-  background-color: rgba(38, 50, 56, 1);
+  background-color: #263238;
   padding: 20px;
   color: white;
   /*position: fixed;*/
@@ -58,6 +58,8 @@ body {
 
 .LogoList img.active {
   background: #eee;
+  border-bottom: 2px solid #ced0d1;
+  padding: 4px 16px;
 }
 
 .Separator {
@@ -92,7 +94,7 @@ body {
 
 .Post h2 .Prefix {
   font-size: 0.8em;
-  color: gray;
+  color: darkgray;
 }
 
 .Post .Content {

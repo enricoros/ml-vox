@@ -30,13 +30,13 @@ const FEEDS = [
   //   url: 'https://medium.com/feed/qualcomm-ventures',
   //   home: 'https://medium.com/qualcomm-ventures'
   // },
-  {
-    id: 'q3',
-    company: 'Qualcomm',
-    name: 'Qualcomm Life',
-    url: 'http://www.qualcommlife.com/blog/feed/rss/our-blog?format=feed',
-    home: 'http://www.qualcommlife.com/blog'
-  },
+  // {
+  //   id: 'q3',
+  //   company: 'Qualcomm',
+  //   name: 'Qualcomm Life',
+  //   url: 'http://www.qualcommlife.com/blog/feed/rss/our-blog?format=feed',
+  //   home: 'http://www.qualcommlife.com/blog'
+  // },
   // {
   //   id: 'q4',
   //   company: 'Qualcomm',
@@ -137,7 +137,7 @@ const FEEDS = [
     name: 'Otoro Blog',
     url: 'http://blog.otoro.net/feed.xml',
     home: 'http://blog.otoro.net/',
-    title_prefix: '(ml+design)'
+    title_prefix: '(ml & design)'
   }
 ];
 
