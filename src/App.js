@@ -98,7 +98,7 @@ class FeedPosts extends Component {
     // filter by recent (or at least 4 messages)
     let filteredMessage = "";
     if (!filteredPosts.length) {
-      filteredMessage = "Loading...";
+      filteredMessage = "Nothing to read yet.";
     } else {
       const recentEnough = Date.now() - 4 * 7 * 24 * 3600 * 1000;
       filteredPosts = filteredPosts.filter((p, idx) => p.date > recentEnough || idx < 4);
