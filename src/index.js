@@ -1,10 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import ReactGA from "react-ga";
+import {BrowserRouter} from "react-router-dom";
 import App from "./App";
-import {HashRouter} from "react-router-dom";
+
+// Google Analytics code
+ReactGA.initialize('UA-65634159-4', {debug: true});
 
 ReactDOM.render((
-  <HashRouter>
+  <BrowserRouter>
     <App/>
-  </HashRouter>
+  </BrowserRouter>
 ), document.getElementById('root'));

@@ -56,7 +56,7 @@ class YouTubeWrapper extends Component {
       <div>
         <YouTube videoId={this.props.videoId} opts={YouTubeOpts}/>
         <br/>
-        <a href="#" onClick={(e) => YouTubeWrapper.onToggle(e, true)}>Disable YouTube.</a>
+        <Button onClick={(e) => YouTubeWrapper.onToggle(e, true)}>Disable YouTube.</Button>
       </div>
     );
   }
