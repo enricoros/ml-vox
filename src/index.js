@@ -5,7 +5,8 @@ import {BrowserRouter} from "react-router-dom";
 import App from "./App";
 
 // Google Analytics code
-ReactGA.initialize('UA-65634159-4', {debug: true});
+ReactGA.initialize('UA-65634159-4');
+ReactGA.pageview(window.location.pathname);
 
 ReactDOM.render((
   <BrowserRouter>
