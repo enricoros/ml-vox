@@ -100,12 +100,12 @@ class FeedPosts extends Component {
     if (!filteredPosts.length) {
       filteredMessage = "Loading...";
     } else {
-      if (filteredPosts.length > 4) {
-        const recentEnough = Date.now() - 4 * 7 * 24 * 3600 * 1000;
-        filteredPosts = filteredPosts.filter(p => p.date > recentEnough);
+      const recentEnough = Date.now() - 4 * 7 * 24 * 3600 * 1000;
+      filteredPosts = filteredPosts.filter((p, idx) => p.date > recentEnough || idx < 4);
+      if (filteredPosts.length <= 4)
+        filteredMessage = "Only showing the last " + filteredPosts.length + " news.";
+      else
         filteredMessage = "Only showing up to 4 weeks.";
-      } else
-        filteredMessage = "Only showing the last " + filteredPosts.length + " messages.";
       filteredMessage += " Everything else is old.";
     }
     // separate Today's from formers messages

@@ -12,7 +12,7 @@ const LOGO_FILES = {
   'CEVA': 'logo-ceva.png',
   'OpenAI': 'logo-openai.png',
   'Two Minute Papers': 'logo-misc-two-minute-papers.png',
-  'Otoro Blog': 'logo-misc-otoro.png',
+  'Otoro': 'logo-misc-otoro.png',
 };
 
 const FEEDS = [
