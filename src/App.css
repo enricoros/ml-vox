@@ -151,7 +151,8 @@ body {
 }
 
 .Post .Content .Thumbnail > img {
-  max-height: 100px;
+  max-height: 120px;
+  max-width: 180px;
 }
 
 .Post .Footer {
