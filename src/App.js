@@ -91,6 +91,8 @@ const Post = ({post}) =>
 
 const Separator = ({title}) => <div className="Separator">{title && <span>{title}</span>}</div>;
 
+const MIN_POSTS = 5;
+
 class FeedPosts extends Component {
   render() {
     const today = Date.now() - 1.4 * 24 * 3600 * 1000;
@@ -102,8 +104,8 @@ class FeedPosts extends Component {
       filteredMessage = "Nothing to read yet.";
     } else {
       const recentEnough = Date.now() - 4 * 7 * 24 * 3600 * 1000;
-      filteredPosts = filteredPosts.filter((p, idx) => p.date > recentEnough || idx < 4);
-      if (filteredPosts.length <= 4)
+      filteredPosts = filteredPosts.filter((p, idx) => p.date > recentEnough || idx < MIN_POSTS);
+      if (filteredPosts.length <= MIN_POSTS)
         filteredMessage = "Only showing the last " + filteredPosts.length + " news.";
       else
         filteredMessage = "Only showing up to 4 weeks.";
@@ -129,7 +131,8 @@ class FeedPosts extends Component {
 
 class HeaderTitle extends Component {
   render() { /*🎤🤖*/
-    return <span>Machine Learning Leaders News</span>;
+    return <span onClick={() => window.location.href = '/'}
+                 style={{cursor: 'pointer'}}>Machine Learning Leaders News</span>;
   }
 }
 
@@ -162,9 +165,13 @@ const Footer = () =>
       </p>
       <br/>
       <p>
-        This AI News RSS aggregator has been maade with the freshest ingredients,<br/>
+        This curated AI News RSS aggregator has been made with the freshest ingredients,<br/>
         including <a href="https://pair-code.github.io/deeplearnjs/"><i>deeplearn.js</i></a> and <a
         href="https://facebook.github.io/react/"><i>React</i></a> and ❤.
+      </p>
+      <p>
+        Sorry for not having ads, but they're annoying.<br/>
+        More tools for you, ML/AI lover, will come soon.
       </p>
       <br/>
       <p className="Author">
