@@ -43,7 +43,7 @@ body {
 
 .App-footer-container {
   position: relative;
-  color: white;
+  color: #f0f0f0;
   background-color: #263238;
 }
 
@@ -51,15 +51,19 @@ body {
   padding-top: 40px;
   padding-bottom: 40px;
   font-family: 'Open Sans', sans-serif;
-  color: #999ea0;
+  color: #b5b5b5;
 }
 
 .App-footer a {
-  color: #999ea0;
+  color: #ececec;
 }
 
 .App-footer .Tagline {
   color: white;
+}
+
+.App-footer .Author {
+  color: #5a5e61;
 }
 
 .App-Body {

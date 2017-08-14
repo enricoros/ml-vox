@@ -116,7 +116,7 @@ class FeedPosts extends Component {
       {todayPosts.length > 0 && <div>{todayPosts.map(p => <Post post={p} key={p.hash}/>)}</div>}
       {todayPosts.length > 0 && <div><h3>&nbsp;</h3><Separator title="Yesterday and earlier"/><h3>&nbsp;</h3></div>}
       {afterPosts.length > 0 && <div>{afterPosts.map(p => <Post post={p} key={p.hash}/>)}</div>}
-      {filteredPosts.length > 0 && <hr/>}
+      {/*{filteredPosts.length > 0 && <hr/>}*/}
       <div className="Post TheEnd">
         <h3>&nbsp;</h3>
         <h3>{filteredMessage}</h3>
@@ -162,12 +162,13 @@ const Footer = () =>
       </p>
       <br/>
       <p>
-        This AI News RSS aggregator has been made with ❤ and with the freshest ingredients including&nbsp;
-        <a href="https://facebook.github.io/react/">React</a> and <a href="https://pair-code.github.io/deeplearnjs/">deeplearn.js</a>.
+        This AI News RSS aggregator has been maade with the freshest ingredients,<br/>
+        including <a href="https://pair-code.github.io/deeplearnjs/"><i>deeplearn.js</i></a> and <a
+        href="https://facebook.github.io/react/"><i>React</i></a> and ❤.
       </p>
       <br/>
-      <p>
-        - enrico, {new Date().getFullYear().toString()}.
+      <p className="Author">
+        Enrico Ros, {new Date().getFullYear().toString()}
       </p>
     </div>
   </div>;
