@@ -51,9 +51,14 @@ body {
   padding-top: 40px;
   padding-bottom: 40px;
   font-family: 'Open Sans', sans-serif;
+  color: #999ea0;
 }
 
 .App-footer a {
+  color: #999ea0;
+}
+
+.App-footer .Tagline {
   color: white;
 }
 
@@ -75,8 +80,6 @@ body {
 
 .LogoList img.active {
   background: #ddd;
-  /*border-bottom: 2px solid #ced0d1;*/
-  /*padding: 4px 16px;*/
 }
 
 .Separator {
@@ -154,6 +157,10 @@ body {
 .Post .Footer {
   color: gray;
   text-align: center;
+}
+
+.Post .Footer a {
+  color: #8f9ca8;
 }
 
 .Post.TheEnd {

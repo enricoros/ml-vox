@@ -83,7 +83,7 @@ const Post = ({post}) =>
       <div className="Footer">
         <Row>
           <Col md={8} style={{textAlign: 'left'}}>- {post._author || post.feed.title}, {humanDate(post.date)}</Col>
-          <Col md={4} style={{textAlign: 'right'}}><a href={post.feed.spec.home}>- {post.feed.spec.name}</a></Col>
+          <Col md={4} style={{textAlign: 'right'}}><a href={post.feed.spec.home}>➥ {post.feed.spec.name}</a></Col>
         </Row>
       </div>
     </div>
@@ -116,7 +116,7 @@ class FeedPosts extends Component {
       {todayPosts.length > 0 && <div>{todayPosts.map(p => <Post post={p} key={p.hash}/>)}</div>}
       {todayPosts.length > 0 && <div><h3>&nbsp;</h3><Separator title="Yesterday and earlier"/><h3>&nbsp;</h3></div>}
       {afterPosts.length > 0 && <div>{afterPosts.map(p => <Post post={p} key={p.hash}/>)}</div>}
-      <hr/>
+      {filteredPosts.length > 0 && <hr/>}
       <div className="Post TheEnd">
         <h3>&nbsp;</h3>
         <h3>{filteredMessage}</h3>
@@ -157,16 +157,16 @@ const Header = ({onRefreshClick, scale, onScaleChange, onFeedChange}) =>
 const Footer = () =>
   <div className="App-footer-container">
     <div className="container App-footer">
-      <p>
+      <p className="Tagline">
         Coffe and AI news in the morning, what a beautiful routine to kickstart your day.
       </p>
       <br/>
-      <p style={{color: '#e2e6e8'}}>
-        Made with 💗 for AI, using 🤖,&nbsp;<a href="https://facebook.github.io/react/">React</a>,&nbsp;
-        <a href="https://pair-code.github.io/deeplearnjs/">deeplearn.js</a>, and it's all on the client side.
+      <p>
+        This RSS aggregator has been made with ❤, and with the freshest ingredients including
+        <a href="https://facebook.github.io/react/">React</a> and <a href="https://pair-code.github.io/deeplearnjs/">deeplearn.js</a>.
       </p>
       <br/>
-      <p style={{color: '#d3d6d8'}}>
+      <p>
         Enrico Ros, {new Date().getFullYear().toString()}.
       </p>
     </div>
