@@ -8,7 +8,7 @@ import YouTube from "react-youtube";
 
 import {FEEDS, LOGO_FILES} from "./Feeds";
 import FeedParser, {ellipsize} from "./FeedParser";
-import NNArtCanvas from "./nn/NNArtCanvas";
+import {NNArt} from "./nn/NNArt";
 
 const colorize = (snippet, color) => <span style={{color: color}}>{snippet}</span>;
 
@@ -127,15 +127,21 @@ class FeedPosts extends Component {
   }
 }
 
+class HeaderTitle extends Component {
+  render() { /*🎤🤖*/
+    return <span>Machine Learning Leaders News</span>;
+  }
+}
+
 const Header = ({onRefreshClick, scale, onScaleChange, onFeedChange}) =>
   <div className="App-header-container">
-    <NNArtCanvas/>
+    <NNArt/>
     <div className="App-header">
       <div className="container">
         <h2>
           <Row>
             <Col sm={8} smHidden xsHidden>
-              Machine Learning Leaders Voice
+              <HeaderTitle/>
             </Col>
             <Col sm={8} mdHidden lgHidden>
               ML Leaders Voice
@@ -148,6 +154,24 @@ const Header = ({onRefreshClick, scale, onScaleChange, onFeedChange}) =>
           </Row>
         </h2>
       </div>
+    </div>
+  </div>;
+
+const Footer = () =>
+  <div className="App-footer-container">
+    <div className="container App-footer">
+      <p>
+        Coffe and AI news in the morning, what a beautiful routine to kickstart your day.
+      </p>
+      <br/>
+      <p style={{color: '#e2e6e8'}}>
+        Made with 💗 for AI, using 🤖,&nbsp;<a href="https://facebook.github.io/react/">React</a>,&nbsp;
+        <a href="https://pair-code.github.io/deeplearnjs/">deeplearn.js</a>, and it's all on the client side.
+      </p>
+      <br/>
+      <p style={{color: '#d3d6d8'}}>
+        Enrico Ros, {new Date().getFullYear().toString()}.
+      </p>
     </div>
   </div>;
 
@@ -243,6 +267,7 @@ class App extends Component {
           <LogoList filterCompany={this.state.filterByCompany} onCompanyFilter={this.onCompanyFilter.bind(this)}/>
           <FeedPosts posts={this.state.posts} filterByCompany={this.state.filterByCompany}/>
         </div>
+        <Footer/>
       </div>
     );
   }

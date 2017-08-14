@@ -14,15 +14,17 @@ body {
   background-color: #263238;
 }
 
-.App-header-container .NN-Art-Canvas {
+.App-header-container .NN-Art {
   position: absolute;
   width: 100%;
   height: 100%;
-  opacity: 0.2;
+  opacity: 0.1;
 }
 
-.App-Small .App-header-container .NN-Art-Canvas {
-  position: fixed;
+.NN-Art .NN-Art-Canvas {
+  position: absolute;
+  width: 100%;
+  height: 100%;
 }
 
 .App-header {
@@ -34,20 +36,27 @@ body {
 .App-header h2 {
   font-size: 30px;
   margin: 15px 0;
-}
-
-.btn-transparent,
-.btn-transparent:focus {
-  background: none;
-  box-shadow: none;
-  border: none;
-  outline: none;
-  color: white;
-  text-shadow: none;
+  /*color: #e2e6e8;*/
 }
 
 .App-header-right {
   text-align: right;
+}
+
+.App-footer-container {
+  position: relative;
+  color: white;
+  background-color: #263238;
+}
+
+.App-footer {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.App-footer a {
+  color: white;
 }
 
 .App-Body {
@@ -160,6 +169,10 @@ body {
 
 /* Small Style changes */
 
+.App-Small .App-header-container .NN-Art {
+  position: fixed;
+}
+
 .App-Small .App-header {
   padding: 0;
 }
@@ -197,4 +210,14 @@ body {
 .App-Small .Post .Content .Company > img,
 .App-Small .Post .Content .Thumbnail > img {
   max-height: 18px;
+}
+
+.btn-transparent,
+.btn-transparent:focus {
+  background: none;
+  box-shadow: none;
+  border: none;
+  outline: none;
+  color: white;
+  text-shadow: none;
 }
