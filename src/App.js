@@ -207,7 +207,8 @@ class App extends Component {
   }
 
   onRefreshClicked() {
-    FEEDS.forEach(spec => FeedParser.loadAndParse(spec.url, (err, feed) => {
+    const allowAll = window.location.search.indexOf('enrico') !== -1;
+    FEEDS.filter(spec => !spec.disabled || allowAll).forEach(spec => FeedParser.loadAndParse(spec.url, (err, feed) => {
       if (err) {
         console.error("Error while fetching " + spec.name + ", on: " + spec.url);
         console.log(err);
