@@ -162,12 +162,12 @@ const Footer = () =>
       </p>
       <br/>
       <p>
-        This RSS aggregator has been made with ❤, and with the freshest ingredients including
+        This AI News RSS aggregator has been made with ❤ and with the freshest ingredients including&nbsp;
         <a href="https://facebook.github.io/react/">React</a> and <a href="https://pair-code.github.io/deeplearnjs/">deeplearn.js</a>.
       </p>
       <br/>
       <p>
-        Enrico Ros, {new Date().getFullYear().toString()}.
+        - enrico, {new Date().getFullYear().toString()}.
       </p>
     </div>
   </div>;
