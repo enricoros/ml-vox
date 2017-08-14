@@ -8,13 +8,7 @@ body {
   font-family: sans-serif;
 }
 
-.App-header-container {
-  position: relative;
-  color: white;
-  background-color: #263238;
-}
-
-.App-header-container .NN-Art {
+.NN-Art {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -22,15 +16,19 @@ body {
 }
 
 .NN-Art .NN-Art-Canvas {
-  position: absolute;
   width: 100%;
   height: 100%;
 }
 
+.App-header-container {
+  position: relative;
+}
+
 .App-header {
+  color: white;
+  background-color: #263238;
   font-family: 'Noto Serif', serif;
-  padding: 20px;
-  z-index: 2;
+  padding: 20px 0;
 }
 
 .App-header h2 {
@@ -64,22 +62,21 @@ body {
 }
 
 .LogoList {
+  position: relative;
   text-align: center;
-  padding: 2em 0 1em 0;
-  margin-bottom: -2em;
 }
 
 .LogoList img {
-  max-height: 32px;
-  line-height: 32px;
-  padding: 5px 16px;
+  max-height: 42px;
+  line-height: 42px;
+  padding: 10px 15px;
   cursor: pointer;
 }
 
 .LogoList img.active {
-  background: #eee;
-  border-bottom: 2px solid #ced0d1;
-  padding: 4px 16px;
+  background: #ddd;
+  /*border-bottom: 2px solid #ced0d1;*/
+  /*padding: 4px 16px;*/
 }
 
 .Separator {
@@ -99,10 +96,8 @@ body {
 }
 
 .Post {
-  margin-top: 40px;
+  margin: 30px auto 40px;
   /*max-width: 800px;*/
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .Post h2 {
@@ -169,7 +164,7 @@ body {
 
 /* Small Style changes */
 
-.App-Small .App-header-container .NN-Art {
+.App-Small .NN-Art {
   position: fixed;
 }
 

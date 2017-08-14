@@ -134,26 +134,23 @@ class HeaderTitle extends Component {
 }
 
 const Header = ({onRefreshClick, scale, onScaleChange, onFeedChange}) =>
-  <div className="App-header-container">
-    <NNArt/>
-    <div className="App-header">
-      <div className="container">
-        <h2>
-          <Row>
-            <Col sm={8} smHidden xsHidden>
-              <HeaderTitle/>
-            </Col>
-            <Col sm={8} mdHidden lgHidden>
-              ML Leaders Voice
-            </Col>
-            <Col sm={4} className="App-header-right" xsHidden>
-              <Button onClick={onScaleChange} className="btn-transparent">{scale}</Button>
-              {/*<Button onClick={onFeedChange} className="btn-transparent">Feeds</Button>*/}
-              <Button onClick={onRefreshClick} bsStyle="primary">Refresh</Button>
-            </Col>
-          </Row>
-        </h2>
-      </div>
+  <div className="App-header">
+    <div className="container">
+      <h2>
+        <Row>
+          <Col sm={8} smHidden xsHidden>
+            <HeaderTitle/>
+          </Col>
+          <Col sm={8} mdHidden lgHidden>
+            ML Leaders Voice
+          </Col>
+          <Col sm={4} className="App-header-right" xsHidden>
+            <Button onClick={onScaleChange} className="btn-transparent">{scale}</Button>
+            {/*<Button onClick={onFeedChange} className="btn-transparent">Feeds</Button>*/}
+            <Button onClick={onRefreshClick} bsStyle="primary">Refresh</Button>
+          </Col>
+        </Row>
+      </h2>
     </div>
   </div>;
 
@@ -262,10 +259,13 @@ class App extends Component {
   render() {
     return (
       <div className={'App-' + this.state.scale}>
-        <Header scale={this.state.scale} onRefreshClick={this.onRefreshClicked.bind(this)}
-                onScaleChange={this.onScaleChange.bind(this)}/>
-        <div className='container App-Body'>
+        <div className="App-header-container">
+          <NNArt/>
+          <Header scale={this.state.scale} onRefreshClick={this.onRefreshClicked.bind(this)}
+                  onScaleChange={this.onScaleChange.bind(this)}/>
           <LogoList filterCompany={this.state.filterByCompany} onCompanyFilter={this.onCompanyFilter.bind(this)}/>
+        </div>
+        <div className='container App-Body'>
           <FeedPosts posts={this.state.posts} filterByCompany={this.state.filterByCompany}/>
         </div>
         <Footer/>
