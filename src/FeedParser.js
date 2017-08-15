@@ -1,6 +1,8 @@
 import request from "request";
 import xml2js from "xml2js";
 
+const DEBUG_ADD_SRC = false;
+
 const v = (container, key) => {
   const value = container[key];
   if (typeof value === "undefined" || value === null)
@@ -113,8 +115,11 @@ const FeedParser = {
       description: v(channel, 'description'),
       url: v(channel, 'link'),
       posts: [],
-      _debug_source: channel
     };
+    if (DEBUG_ADD_SRC) {
+      feed._debug_source = channel;
+      delete feed._debug_source['item'];
+    }
     FeedParser.findUnknownKeys(channel, [
       /* parsed */ 'title', 'description', 'link', 'item',
       /* ignored */ 'language', 'generator', 'atom:link', 'lastBuildDate', 'sy:updatePeriod',
@@ -127,11 +132,12 @@ const FeedParser = {
         url: v(val, 'link'),
         date: parseDate(v(val, 'pubDate')),
         hash: undefined,
-        _author: v(val, 'dc:creator'),
-        _id: v(val, 'guid')['_'],
+        author: v(val, 'dc:creator'),
+        // _id: v(val, 'guid')['_'],  /* we'll be using hash, and not trusting this */
         _thumbUrl: v(v(val, 'media:content'), 'url'),
-        _debug_source: val
       };
+      if (DEBUG_ADD_SRC)
+        item._debug_source = val;
       FeedParser.findUnknownKeys(val, [
         /* parsed */ 'title', 'description', 'link', 'pubDate', 'guid', 'media:content',
         /* skipped */ 'category', 'dc:creator', 'content:encoded', 'comments', 'wfw:commentRss', 'slash:comments', 'atom:updated'
@@ -139,7 +145,6 @@ const FeedParser = {
       item.hash = hashForPost(item);
       feed.posts.push(item);
     }
-    delete feed._debug_source['item'];
     return feed;
   },
 
@@ -157,8 +162,11 @@ const FeedParser = {
       description: atomHtmlString(v(jsonFeed, 'subtitle')),
       url: url,
       posts: [],
-      _debug_source: jsonFeed
     };
+    if (DEBUG_ADD_SRC) {
+      feed._debug_source = jsonFeed;
+      delete feed._debug_source['entry'];
+    }
     FeedParser.findUnknownKeys(jsonFeed, [
       /* parsed */ 'title', 'subtitle', 'entry',
       /* skipped */ 'author', 'category', 'generator', 'id', 'link', 'updated', 'openSearch:itemsPerPage',
@@ -174,18 +182,19 @@ const FeedParser = {
         url: atomFindHtmlUrl(val['link']),
         date: parseDate(v(val, 'published')),
         hash: undefined,
-        _author: v(v(val, 'author'), 'name'),
-        _id: v(val, 'id'),
+        author: v(v(val, 'author'), 'name'),
+        // _id: v(val, 'id'),  /* we'll be using hash, and not trusting this */
         _thumbUrl: v(v(val, 'media:thumbnail'), 'url'),
-        _debug_source: val
       };
+      if (DEBUG_ADD_SRC)
+        item._debug_source = val;
       // patch for Blogger's "content" and "author" melting
       if (item.description.startsWith('Posted by ') && valContent['_'].startsWith('<span ')) {
         let contentHtml = valContent['_'];
         const authorEndIdx = contentHtml.indexOf('</span>') + 7;
         const authorHtml = contentHtml.substr(0, authorEndIdx);
         contentHtml = contentHtml.substr(authorEndIdx);
-        item._author = removeHtmlTags(authorHtml).replace('Posted by ', '');
+        item.author = removeHtmlTags(authorHtml).replace('Posted by ', '');
         item.description = removeHtmlTags(contentHtml);
       }
       // patch content with media:group
@@ -208,7 +217,6 @@ const FeedParser = {
       item.hash = hashForPost(item);
       feed.posts.push(item);
     }
-    delete feed._debug_source['entry'];
     return feed;
   },
 };

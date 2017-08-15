@@ -82,7 +82,7 @@ const Post = ({post}) =>
       <Clearfix/>
       <div className="Footer">
         <Row>
-          <Col md={8} style={{textAlign: 'left'}}>- {post._author || post.feed.title}, {humanDate(post.date)}</Col>
+          <Col md={8} style={{textAlign: 'left'}}>- {post.author || post.feed.title}, {humanDate(post.date)}</Col>
           <Col md={4} style={{textAlign: 'right'}}><a href={post.feed.spec.home}>➥ {post.feed.spec.name}</a></Col>
         </Row>
       </div>
