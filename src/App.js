@@ -213,7 +213,7 @@ class App extends Component {
 
   onRefreshClicked() {
     const allowAll = window.location.search.indexOf('enrico') !== -1;
-    FEEDS.filter(spec => !spec.disabled || allowAll).forEach(spec => FeedParser.loadAndParse(spec.url, (err, feed) => {
+    FEEDS.filter(spec => !spec.disabled || allowAll).forEach(spec => FeedParser.loadAndParse(spec.url, true, (err, feed) => {
       if (err) {
         console.error("Error while fetching " + spec.name + ", on: " + spec.url);
         console.log(err);
@@ -227,11 +227,11 @@ class App extends Component {
       // point every post to the containing feed, and to our internal feed DB entry
       feed.posts.forEach(post => post['feed'] = feed);
       // regen the posts list
-      this.updateFeedPosts();
+      this.updatePostsList();
     }));
   }
 
-  updateFeedPosts() {
+  updatePostsList() {
     // re-make the full posts list
     let posts = [];
     Object.keys(this.downloadedFeeds).map(feedId => this.downloadedFeeds[feedId]).forEach(feed => {
