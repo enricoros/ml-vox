@@ -116,13 +116,13 @@ class FeedPosts extends Component {
     }
     // separate Today's from formers messages
     const todayPosts = filteredPosts.filter(p => p.date >= today);
-    const yesterPosts = filteredPosts.filter(p => p.date < today && p.date >= yesterday);
+    const yesterdayPosts = filteredPosts.filter(p => p.date < today && p.date >= yesterday);
     const afterPosts = filteredPosts.filter(p => p.date < yesterday);
     return <div>
       {todayPosts.length > 0 && <div>{todayPosts.map(p => <Post post={p} key={p.hash}/>)}</div>}
-      {(todayPosts.length > 0 && yesterPosts.length > 0) &&
+      {(todayPosts.length > 0 && yesterdayPosts.length > 0) &&
       <div><h3>&nbsp;</h3><Separator title="Yesterday"/><h3>&nbsp;</h3></div>}
-      {yesterPosts.length > 0 && <div>{yesterPosts.map(p => <Post post={p} key={p.hash}/>)}</div>}
+      {yesterdayPosts.length > 0 && <div>{yesterdayPosts.map(p => <Post post={p} key={p.hash}/>)}</div>}
       {(afterPosts.length > 0 && afterPosts.length !== filteredPosts.length) &&
       <div><h3>&nbsp;</h3><Separator title="Earlier"/><h3>&nbsp;</h3></div>}
       {afterPosts.length > 0 && <div>{afterPosts.map(p => <Post post={p} key={p.hash}/>)}</div>}
@@ -169,7 +169,7 @@ const Footer = () =>
   <div className="App-footer-container">
     <div className="container App-footer">
       <p className="Tagline">
-        Coffe and AI news in the morning, what a beautiful routine to kickstart your day.
+        Coffee and AI news in the morning, what a beautiful routine to kickstart your day.
       </p>
       <br/>
       <p>
@@ -245,7 +245,7 @@ class App extends Component {
       followRedirect: true
     }, (error, response, data) => {
       if (error || !response || response.statusCode !== 200) {
-        App.handleError('Error fetching the aggregated feed', error)
+        App.handleError('Error fetching the aggregated feed', error);
         return;
       }
       const processedFeeds = JSON.parse(data);
