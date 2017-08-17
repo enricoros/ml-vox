@@ -202,6 +202,7 @@ const LogoList = ({filterCompany, onCompanyFilter}) =>
 
 // set this to true to fetch all the individual streams from the client, instead of the pre-processed aggregated feeds
 const USE_CLIENT_FETCHING = false;
+const REFRESH_INTERVAL = 10 * 60 * 1000; // 10 minutes
 
 class App extends Component {
   ActiveFeeds = {};
@@ -215,7 +216,7 @@ class App extends Component {
 
   componentDidMount() {
     this.onRefreshClicked();
-    this.timerID = setInterval(() => this.onRefreshClicked(), 3600 * 1000);
+    this.timerID = setInterval(() => this.onRefreshClicked(), REFRESH_INTERVAL);
   }
 
   componentWillUnmount() {
@@ -318,7 +319,7 @@ class App extends Component {
           <NNArt/>
           <Header scale={this.state.scale} onRefreshClick={this.onRefreshClicked.bind(this)}
                   onScaleChange={this.onScaleChange.bind(this)}/>
-          {this.state.posts.length > 0 &&
+          {this.state.posts.length > 0 /* conditional render to yield to feed.json*/ &&
           <LogoList filterCompany={this.state.filterByCompany} onCompanyFilter={this.onCompanyFilter.bind(this)}/>}
         </div>
         <div className='container App-Body'>
