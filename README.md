@@ -1,4 +1,4 @@
-# ml-news-stream
-Streaming news from AI/ML industry leaders.
+# ml-vox
+Fresh news from AI/ML industry leaders. Straight from the source.
 
 Demo: https://www.ninjaml.com
