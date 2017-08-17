@@ -81,7 +81,10 @@ const FeedParser = {
   parseWebFeed: (url, usePhpFetcher, callback) => {
     request({
       url: usePhpFetcher ? FeedParser.deCORS(url) : url,
-      headers: {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.19 Safari/537.36'},
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.19 Safari/537.36',
+        'Cache-Control': 'no-cache, no-store, must-revalidate'
+      },
       gzip: !usePhpFetcher, /* the PHP Fetcher returns plain data - for server-side indexing, request GZIP to be faster */
       followRedirect: true
     }, (error, response, xmlData) => {

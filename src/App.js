@@ -245,7 +245,10 @@ class App extends Component {
     const RELATIVE_GENERATED_FEED_PATH = 'feed.json';
     request({
       url: window.location.origin + '/' + RELATIVE_GENERATED_FEED_PATH,
-      headers: {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.19 Safari/537.36'},
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.19 Safari/537.36',
+        'Cache-Control': 'no-cache, no-store, must-revalidate'
+      },
       followRedirect: true
     }, (error, response, data) => {
       if (error || !response || response.statusCode !== 200) {
