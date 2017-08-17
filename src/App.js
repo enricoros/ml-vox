@@ -238,6 +238,7 @@ class App extends Component {
     console.error(message);
     if (exception)
       console.log(exception);
+    NotificationManager.error(message);
   }
 
   updateAllWithServerFeed(ignoreDisabled) {
