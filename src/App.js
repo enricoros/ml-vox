@@ -1,9 +1,11 @@
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/css/bootstrap-theme.css";
+import "react-notifications/lib/notifications.css";
 import "./App.css";
 
 import React, {Component} from "react";
 import {Button, Clearfix, Col, Row} from "react-bootstrap";
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 import YouTube from "react-youtube";
 import request from "request";
 
@@ -213,6 +215,7 @@ class App extends Component {
     posts: [],
     scale: 'Large'
   };
+  isFirstRefresh = true;
 
   componentDidMount() {
     this.onRefreshClicked();
@@ -257,12 +260,22 @@ class App extends Component {
           App.handleError('The aggregated feed is missing ' + spec.id);
       });
       this.updatePostsList();
+      // show the Refresh notification, using the server-side Fetch dates
+      const refreshDates = Object.values(this.ActiveFeeds).map(feed => feed.fetchDate).sort();
+      if (!this.isFirstRefresh && refreshDates.length > 0) {
+        const now = Date.now();
+        // const olderRefresh = Math.round((now - Math.min.apply(null, refreshDates)) / 1000 / 60);
+        const newerRefresh = Math.round((now - Math.max.apply(null, refreshDates)) / 1000 / 60);
+        NotificationManager.info('Refreshed ' + newerRefresh + ' minutes ago.', 'Refreshed', 4000);
+      }
+      this.isFirstRefresh = false;
     });
   }
 
   updateAllWithClientFetching(ignoreDisabled) {
     FEEDS.filter(spec => !spec.disabled || ignoreDisabled).forEach(spec => FeedParser.parseWebFeed(spec.url, true, (err, feed) => {
       if (!err) {
+        feed.fetchDate = Date.now();
         this.shallowMergeFeed(feed, spec);
         this.updatePostsList();
       } else
@@ -326,6 +339,7 @@ class App extends Component {
           <FeedPosts posts={this.state.posts} filterByCompany={this.state.filterByCompany}/>
         </div>
         <Footer/>
+        <NotificationContainer/>
       </div>
     );
   }
