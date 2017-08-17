@@ -5,6 +5,7 @@ import "./App.css";
 import React, {Component} from "react";
 import {Button, Clearfix, Col, Row} from "react-bootstrap";
 import YouTube from "react-youtube";
+import request from "request";
 
 import {FEEDS, LOGO_FILES} from "./Feeds";
 import FeedParser, {ellipsize} from "./FeedParser";
@@ -192,8 +193,11 @@ const LogoList = ({filterCompany, onCompanyFilter}) =>
 // To be added later, when we talk about Routes in this app
 // const NewsFeedApp = (props) => <div/>;
 
+// set this to true to fetch all the individual streams from the client, instead of the pre-processed aggregated feeds
+const USE_CLIENT_FETCHING = false;
+
 class App extends Component {
-  downloadedFeeds = {};
+  ActiveFeeds = {};
   state = {
     errors: [],
     filterByCompany: null,
@@ -213,28 +217,64 @@ class App extends Component {
 
   onRefreshClicked() {
     const allowAll = window.location.search.indexOf('enrico') !== -1;
-    FEEDS.filter(spec => !spec.disabled || allowAll).forEach(spec => FeedParser.loadAndParse(spec.url, true, (err, feed) => {
-      if (err) {
-        console.error("Error while fetching " + spec.name + ", on: " + spec.url);
-        console.log(err);
-        // TODO: add capture of errors
+    if (USE_CLIENT_FETCHING)
+      this.updateAllWithClientFetching(allowAll);
+    else
+      this.updateAllWithServerFeed(allowAll);
+  }
+
+  static handleError(message, exception) {
+    console.error(message);
+    if (exception)
+      console.log(exception);
+  }
+
+  updateAllWithServerFeed(ignoreDisabled) {
+    const RELATIVE_GENERATED_FEED_PATH = 'feed.json';
+    request({
+      url: window.location.origin + '/' + RELATIVE_GENERATED_FEED_PATH,
+      headers: {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.19 Safari/537.36'},
+      followRedirect: true
+    }, (error, response, data) => {
+      if (error || !response || response.statusCode !== 200) {
+        App.handleError('Error fetching the aggregated feed', error)
         return;
       }
-      // add the original spec to the new feed
-      feed.spec = spec;
-      // update the static global contents for this feed
-      this.downloadedFeeds[spec.id] = feed;
-      // point every post to the containing feed, and to our internal feed DB entry
-      feed.posts.forEach(post => post['feed'] = feed);
-      // regen the posts list
+      const processedFeeds = JSON.parse(data);
+      FEEDS.filter(spec => !spec.disabled || ignoreDisabled).forEach(spec => {
+        const feed = processedFeeds[spec.id];
+        if (feed)
+          this.shallowMergeFeed(feed, spec);
+        else
+          App.handleError('The aggregated feed is missing ' + spec.id);
+      });
       this.updatePostsList();
+    });
+  }
+
+  updateAllWithClientFetching(ignoreDisabled) {
+    FEEDS.filter(spec => !spec.disabled || ignoreDisabled).forEach(spec => FeedParser.parseWebFeed(spec.url, true, (err, feed) => {
+      if (!err) {
+        this.shallowMergeFeed(feed, spec);
+        this.updatePostsList();
+      } else
+        App.handleError("Error while fetching " + spec.name + ", on: " + spec.url, err)
     }));
+  }
+
+  shallowMergeFeed(feed, spec) {
+    // add the original spec to the new feed
+    feed.spec = spec;
+    // point every post to the containing feed, and to our internal feed DB entry
+    feed.posts.forEach(post => post['feed'] = feed);
+    // update the static global contents for this feed
+    this.ActiveFeeds[spec.id] = feed;
   }
 
   updatePostsList() {
     // re-make the full posts list
     let posts = [];
-    Object.keys(this.downloadedFeeds).map(feedId => this.downloadedFeeds[feedId]).forEach(feed => {
+    Object.keys(this.ActiveFeeds).map(feedId => this.ActiveFeeds[feedId]).forEach(feed => {
       posts = posts.concat(feed.posts);
     });
     // update the UI with sorted posts by time, newest on top

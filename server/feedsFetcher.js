@@ -25,13 +25,12 @@ function processNextFeed() {
     return;
   }
   console.log('fetching ' + spec.company);
-  FeedParser.loadAndParse(spec.url, false, (err, feed) => {
+  FeedParser.parseWebFeed(spec.url, false, (err, feed) => {
     console.log('  ..' + spec.company + (err ? ' ERROR' : ' ok'));
     if (!err) {
       // shrink the descriptions, for size protection
       feed.posts.forEach(post => post.description = ellipsize(post.description, 800));
-      // add to feed: spec data and fetch date
-      feed.spec = spec;
+      // add to feed: fetch date
       feed.fetchDate = Date.now();
       // overwrite the static global contents for this feed
       Accumulator[spec.id] = feed;

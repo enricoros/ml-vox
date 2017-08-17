@@ -78,12 +78,11 @@ const FeedParser = {
 
   deCORS: url => "https://services.enricoros.com/de-cors.php?csurl=" + encodeURIComponent(url),
 
-  loadAndParse: (url, bounceCORS, callback) => {
+  parseWebFeed: (url, usePhpFetcher, callback) => {
     request({
-      url: bounceCORS ? FeedParser.deCORS(url) : url,
+      url: usePhpFetcher ? FeedParser.deCORS(url) : url,
       headers: {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.19 Safari/537.36'},
-      gzip: true,
-      pool: false,
+      gzip: !usePhpFetcher, /* the PHP Fetcher returns plain data - for server-side indexing, request GZIP to be faster */
       followRedirect: true
     }, (error, response, xmlData) => {
       // console.log('server encoded the data as: ' + (response.headers['content-encoding'] || 'identity'));
