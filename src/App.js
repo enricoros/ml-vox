@@ -120,9 +120,11 @@ class FeedPosts extends Component {
     const afterPosts = filteredPosts.filter(p => p.date < yesterday);
     return <div>
       {todayPosts.length > 0 && <div>{todayPosts.map(p => <Post post={p} key={p.hash}/>)}</div>}
-      {(todayPosts.length > 0 && yesterPosts.length > 0) && <div><h3>&nbsp;</h3><Separator title="Yesterday"/><h3>&nbsp;</h3></div>}
+      {(todayPosts.length > 0 && yesterPosts.length > 0) &&
+      <div><h3>&nbsp;</h3><Separator title="Yesterday"/><h3>&nbsp;</h3></div>}
       {yesterPosts.length > 0 && <div>{yesterPosts.map(p => <Post post={p} key={p.hash}/>)}</div>}
-      {(afterPosts.length > 0 && afterPosts.length !== filteredPosts.length) && <div><h3>&nbsp;</h3><Separator title="Earlier"/><h3>&nbsp;</h3></div>}
+      {(afterPosts.length > 0 && afterPosts.length !== filteredPosts.length) &&
+      <div><h3>&nbsp;</h3><Separator title="Earlier"/><h3>&nbsp;</h3></div>}
       {afterPosts.length > 0 && <div>{afterPosts.map(p => <Post post={p} key={p.hash}/>)}</div>}
       {/*{filteredPosts.length > 0 && <hr/>}*/}
       <div className="Post TheEnd">
@@ -316,7 +318,8 @@ class App extends Component {
           <NNArt/>
           <Header scale={this.state.scale} onRefreshClick={this.onRefreshClicked.bind(this)}
                   onScaleChange={this.onScaleChange.bind(this)}/>
-          <LogoList filterCompany={this.state.filterByCompany} onCompanyFilter={this.onCompanyFilter.bind(this)}/>
+          {this.state.posts.length > 0 &&
+          <LogoList filterCompany={this.state.filterByCompany} onCompanyFilter={this.onCompanyFilter.bind(this)}/>}
         </div>
         <div className='container App-Body'>
           <FeedPosts posts={this.state.posts} filterByCompany={this.state.filterByCompany}/>
