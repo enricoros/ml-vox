@@ -24,7 +24,7 @@ const humanDate = (dateTS) => {
     return colorize('few hours ago.', 'darkgreen');
   if (elapsed < 1.2 * 24 * 3600 * 1000)
     return colorize('today.', 'darkgreen');
-  if (elapsed < 3 * 24 * 3600 * 1000)
+  if (elapsed < 2.5 * 24 * 3600 * 1000)
     return 'yesterday.';
   let prefix = 'on ';
   if (elapsed < 7 * 24 * 3600 * 1000)
@@ -96,7 +96,9 @@ const MIN_POSTS = 5;
 
 class FeedPosts extends Component {
   render() {
+    // keep the following 2 in sync with 'humanDate'
     const today = Date.now() - 1.4 * 24 * 3600 * 1000;
+    const yesterday = Date.now() - 2.5 * 24 * 3600 * 1000;
     // filter by company
     let filteredPosts = this.props.posts.filter(p => this.props.filterByCompany ? p.feed.spec.company === this.props.filterByCompany : true);
     // filter by recent (or at least 4 messages)
@@ -114,10 +116,13 @@ class FeedPosts extends Component {
     }
     // separate Today's from formers messages
     const todayPosts = filteredPosts.filter(p => p.date >= today);
-    const afterPosts = filteredPosts.filter(p => p.date < today);
+    const yesterPosts = filteredPosts.filter(p => p.date < today && p.date >= yesterday);
+    const afterPosts = filteredPosts.filter(p => p.date < yesterday);
     return <div>
       {todayPosts.length > 0 && <div>{todayPosts.map(p => <Post post={p} key={p.hash}/>)}</div>}
-      {todayPosts.length > 0 && <div><h3>&nbsp;</h3><Separator title="Yesterday and earlier"/><h3>&nbsp;</h3></div>}
+      {(todayPosts.length > 0 && yesterPosts.length > 0) && <div><h3>&nbsp;</h3><Separator title="Yesterday"/><h3>&nbsp;</h3></div>}
+      {yesterPosts.length > 0 && <div>{yesterPosts.map(p => <Post post={p} key={p.hash}/>)}</div>}
+      {(afterPosts.length > 0 && afterPosts.length !== filteredPosts.length) && <div><h3>&nbsp;</h3><Separator title="Earlier"/><h3>&nbsp;</h3></div>}
       {afterPosts.length > 0 && <div>{afterPosts.map(p => <Post post={p} key={p.hash}/>)}</div>}
       {/*{filteredPosts.length > 0 && <hr/>}*/}
       <div className="Post TheEnd">
