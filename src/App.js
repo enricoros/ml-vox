@@ -1,10 +1,12 @@
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/css/bootstrap-theme.css";
+//import "react-bootstrap-toggle/dist/bootstrap2-toggle.css";
 import "react-notifications/lib/notifications.css";
 import "./App.css";
 
 import React, {Component} from "react";
 import {Button, Clearfix, Col, Row} from "react-bootstrap";
+//import Toggle from "react-bootstrap-toggle";
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import YouTube from "react-youtube";
 import request from "request";
@@ -146,6 +148,23 @@ class HeaderTitle extends Component {
   }
 }
 
+/*class ToggleButton extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      toggleActive: false
+    }
+  }
+
+  onToggle() {
+    this.setState({toggleActive: !this.state.toggleActive});
+  }
+
+  render() {
+    return <Toggle style="sm" active={this.state.toggleActive} onClick={this.onToggle.bind(this)}/>;
+  }
+}*/
+
 const Header = ({onRefreshClick, scale, onScaleChange, onFeedChange}) =>
   <div className="App-header">
     <div className="container">
@@ -158,6 +177,7 @@ const Header = ({onRefreshClick, scale, onScaleChange, onFeedChange}) =>
             ML Leaders Voice
           </Col>
           <Col sm={4} className="App-header-right" xsHidden>
+            {/*<span>CPPN</span> <ToggleButton/>*/}
             <Button onClick={onScaleChange} className="btn-transparent">{scale}</Button>
             {/*<Button onClick={onFeedChange} className="btn-transparent">Feeds</Button>*/}
             <Button onClick={onRefreshClick} bsStyle="primary">Refresh</Button>

@@ -7,6 +7,7 @@
     "deeplearn": "^0.1.0",
     "react": "^15.6.1",
     "react-bootstrap": "^0.31.2",
+    "react-bootstrap-toggle": "^2.0.8",
     "react-dom": "^15.6.1",
     "react-ga": "^2.2.0",
     "react-notifications": "^1.4.3",
