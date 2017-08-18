@@ -265,16 +265,33 @@ class App extends Component {
           App.handleError('The aggregated feed is missing ' + spec.id);
       });
       this.updatePostsList();
-      // show the Refresh notification, using the server-side Fetch dates
-      const refreshDates = Object.values(this.ActiveFeeds).map(feed => feed.fetchDate).sort();
-      if (!this.isFirstRefresh && refreshDates.length > 0) {
-        const now = Date.now();
-        // const olderRefresh = Math.round((now - Math.min.apply(null, refreshDates)) / 1000 / 60);
-        const newerRefresh = Math.round((now - Math.max.apply(null, refreshDates)) / 1000 / 60);
-        NotificationManager.info('Refreshed ' + newerRefresh + ' minutes ago.', 'Refreshed', 4000);
-      }
-      this.isFirstRefresh = false;
+      this.showRefreshPopup();
     });
+  }
+
+  showRefreshPopup() {
+    // show the Refresh notification, using the server-side Fetch dates
+    const refreshDates = Object.values(this.ActiveFeeds).map(feed => feed.fetchDate).sort();
+    if (this.isFirstRefresh || refreshDates.length < 1) {
+      this.isFirstRefresh = false;
+      return;
+    }
+    const now = Date.now();
+    const newerMin = Math.round((now - Math.max.apply(null, refreshDates)) / 1000 / 60);
+    let msg = "Refreshed ";
+    if (newerMin < 1)
+      msg += 'less than a minute';
+    else if (newerMin === 1)
+      msg += '1 minute';
+    else if (newerMin < 90)
+      msg += newerMin + ' minutes';
+    else
+      msg += Math.round(newerMin / 60) + ' hours';
+    msg += ' ago.';
+    const olderDeltaMin = newerMin - Math.round((now - Math.min.apply(null, refreshDates)) / 1000 / 60);
+    if (olderDeltaMin > 10)
+      msg += " One feed hasn't been updated for " + olderDeltaMin + " minutes.";
+    NotificationManager.info(msg, 'Refreshed', 4000);
   }
 
   updateAllWithClientFetching(ignoreDisabled) {
