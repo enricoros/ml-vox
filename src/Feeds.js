@@ -13,6 +13,7 @@ const LOGO_FILES = {
   'OpenAI': 'logo-openai.png',
   'Two Minute Papers': 'logo-misc-two-minute-papers.png',
   'Otoro': 'logo-misc-otoro.png',
+  'Import AI': 'logo-misc-newsletter.png',
 };
 
 const FEEDS = [
@@ -139,6 +140,14 @@ const FEEDS = [
     url: 'http://blog.otoro.net/feed.xml',
     home: 'http://blog.otoro.net/',
     title_prefix: '(ml & design)'
+  },
+  {
+    id: 'iai',
+    company: 'Import AI',
+    name: 'Import AI Newsletter',
+    url: 'https://jack-clark.net/feed/',
+    home: 'https://jack-clark.net/import-ai/',
+    title_prefix: '(AI newsletter)'
   }
 ];
 
