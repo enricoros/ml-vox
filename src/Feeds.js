@@ -125,7 +125,7 @@ const FEEDS = [
   },
 
   {
-    disabled: true,
+    disabled: false,
     id: 'tmp',
     company: 'Two Minute Papers',
     name: 'Two Minute Papers',
