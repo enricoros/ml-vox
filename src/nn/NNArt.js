@@ -66,7 +66,7 @@ class NNArt extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isDisabled: localStorage.getItem('disable_nn_art') === 'true'
+      isDisabled: localStorage.getItem('disable_nn_art') === 'true' || localStorage.getItem('disable_nn_art') === null
     }
   }
 
