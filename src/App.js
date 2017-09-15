@@ -171,7 +171,7 @@ const Footer = () =>
   <div className="App-footer-container">
     <div className="container App-footer">
       <p className="Tagline">
-        Coffee and AI news in the morning, what a beautiful routine to kickstart your day.
+        Coffee and AI news in the morning, what a powerful routine to kickstart your day.
       </p>
       <br/>
       <p>
