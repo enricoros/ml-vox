@@ -1,6 +1,6 @@
 import {readFileSync, writeFileSync} from 'fs';
-import {FEEDS} from "../src/Feeds";
-import FeedParser, {ellipsize} from "../src/FeedParser";
+import {FEEDS} from "../src/Config";
+import FeedParser, {ellipsize} from "../src/eutils/FeedParser";
 
 const OUTPUT_ACCUMULATOR_FILE = 'feed.json';
 

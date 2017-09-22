@@ -9,8 +9,8 @@ import {NotificationContainer, NotificationManager} from 'react-notifications';
 import YouTube from "react-youtube";
 import request from "request";
 
-import {FEEDS, LOGO_FILES} from "./Feeds";
-import FeedParser, {ellipsize} from "./FeedParser";
+import {FEEDS, LOGO_FILES} from "./Config";
+import FeedParser, {ellipsize} from "./eutils/FeedParser";
 import {NNArt} from "./nn/NNArt";
 
 const colorize = (snippet, color) => <span style={{color: color}}>{snippet}</span>;
