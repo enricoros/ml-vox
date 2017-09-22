@@ -126,8 +126,9 @@ const FeedParser = {
     FeedParser.findUnknownKeys(channel, [
       /* parsed */ 'title', 'description', 'link', 'item',
       /* ignored */ 'language', 'generator', 'atom:link', 'lastBuildDate', 'sy:updatePeriod',
-      'sy:updateFrequency', 'ttl', 'pubDate', 'image', 'webMaster'
-    ], url);
+      'sy:updateFrequency', 'ttl', 'pubDate', 'image', 'webMaster',
+      /* skipped Import AI*/ 'cloud',
+    ], 'rss/channel', url);
     for (let val of [].concat(channel.item)) {
       const item = {
         title: v(val, 'title'),
@@ -143,19 +144,20 @@ const FeedParser = {
         item._debug_source = val;
       FeedParser.findUnknownKeys(val, [
         /* parsed */ 'title', 'description', 'link', 'pubDate', 'guid', 'media:content',
-        /* skipped */ 'category', 'dc:creator', 'content:encoded', 'comments', 'wfw:commentRss', 'slash:comments', 'atom:updated'
-      ], url);
+        /* skipped */ 'category', 'dc:creator', 'content:encoded', 'comments', 'wfw:commentRss', 'slash:comments', 'atom:updated',
+        /* skipped amazon */ 'enclosure',
+      ], 'rss/post', url);
       item.hash = hashForPost(item);
       feed.posts.push(item);
     }
     return feed;
   },
 
-  findUnknownKeys(obj, known_keys, debugUrl) {
+  findUnknownKeys(obj, known_keys, debugContext, debugUrl) {
     // print unsupported properties, as a promise for better parsing
     for (let key of Object.keys(obj))
       if (known_keys.indexOf(key) === -1)
-        console.log('FeedParser: non-parsed property \'' + key + ' = ' + JSON.stringify(obj[key]) + ', on: ' + debugUrl);
+        console.log('FeedParser: non-parsed property \'' + key + ' = ' + JSON.stringify(obj[key]) + ', context: ' + debugContext + ', on: ' + debugUrl);
   },
 
   parseFeed: (jsonFeed, url) => {
@@ -176,7 +178,7 @@ const FeedParser = {
       'openSearch:startIndex', 'openSearch:totalResults', 'xmlns', 'xmlns:openSearch', 'xmlns:gd',
       'xmlns:georss', 'xmlns:blogger', 'xmlns:thr',
       /* skipped youtube */ 'xmlns:yt', 'xmlns:media', 'yt:channelId', 'published'
-    ], url);
+    ], 'feed/channel', url);
     for (let val of [].concat(jsonFeed.entry)) {
       const valContent = v(val, 'content');
       const item = {
@@ -216,7 +218,7 @@ const FeedParser = {
         /* parsed youtube */ 'media:group',
         /* skipped */ 'id', 'category', 'updated', 'gd:extendedProperty', 'thr:total',
         /* skipped youtube */ 'yt:videoId', 'yt:channelId'
-      ], url);
+      ], 'feed/post', url);
       item.hash = hashForPost(item);
       feed.posts.push(item);
     }
