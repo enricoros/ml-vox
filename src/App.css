@@ -107,6 +107,29 @@ body {
 .Post {
   margin: 30px auto 40px;
   /*max-width: 800px;*/
+  /* this is here for the .NewOnScreen to be plugged into */
+  position: relative;
+}
+
+.Post .NewOnScreen {
+  position: absolute;
+  left: -12px;
+  width: 6px;
+  height: 100%;
+  animation: 2s AttentionAttractor;
+  animation-delay: 1s;
+}
+
+@keyframes AttentionAttractor {
+  0% {
+    background-color: transparent;
+  }
+  40% {
+    background-color: red;
+  }
+  100% {
+    background-color: transparent;
+  }
 }
 
 .Post h2 {

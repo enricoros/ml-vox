@@ -68,6 +68,7 @@ class YouTubeWrapper extends Component {
 
 const Post = ({post}) =>
   <div className="Post">
+    {post.newOnScreen && <div className="NewOnScreen"/>}
     <h2><span className="Prefix">{post.feed.spec.title_prefix}</span> <a href={post.url}>{post.title}</a></h2>
     <div className="Content">
       <p>
@@ -116,6 +117,8 @@ class FeedPosts extends Component {
         filteredMessage = "Only showing up to 4 weeks.";
       filteredMessage += " Everything else is old.";
     }
+    // set the post attribute to signal it's shown for the first time (imperfect but optimized way of doing it)
+    filteredPosts.forEach(p => p.newOnScreen = p.date >= this.props.lastRefreshDate);
     // separate Today's from formers messages
     const todayPosts = filteredPosts.filter(p => p.date >= today);
     const yesterdayPosts = filteredPosts.filter(p => p.date < today && p.date >= yesterday);
@@ -213,7 +216,8 @@ class App extends Component {
     filterByCompany: null,
     filterSticky: false,
     posts: [],
-    scale: 'Large'
+    scale: 'Large',
+    lastRefreshDate: Date.now()
   };
   isFirstRefresh = true;
 
@@ -227,6 +231,11 @@ class App extends Component {
   }
 
   onRefreshClicked() {
+    // get the last refresh date and set it to current - this will be used to highlight new posts
+    this.setState({lastRefreshDate: parseInt(localStorage.getItem('last_refresh_date') || Date.now())});
+    localStorage.setItem('last_refresh_date', Date.now());
+
+    // use the right kind of fetching, with the right level of completeness
     const allowAll = window.location.search.indexOf('enrico') !== -1;
     if (USE_CLIENT_FETCHING)
       this.updateAllWithClientFetching(allowAll);
@@ -358,7 +367,8 @@ class App extends Component {
           <LogoList filterCompany={this.state.filterByCompany} onCompanyFilter={this.onCompanyFilter.bind(this)}/>}
         </div>
         <div className='container App-Body'>
-          <FeedPosts posts={this.state.posts} filterByCompany={this.state.filterByCompany}/>
+          <FeedPosts posts={this.state.posts} filterByCompany={this.state.filterByCompany}
+                     lastRefreshDate={this.state.lastRefreshDate}/>
         </div>
         <Footer/>
         <NotificationContainer/>
