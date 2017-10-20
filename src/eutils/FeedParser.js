@@ -140,6 +140,14 @@ const FeedParser = {
         // _id: v(val, 'guid')['_'],  /* we'll be using hash, and not trusting this */
         _thumbUrl: v(v(val, 'media:content'), 'url'),
       };
+      // patch description with content:encoded (for Medium)
+      if (item.description === "" && val.hasOwnProperty('content:encoded')) {
+        let content = v(val, 'content:encoded');
+        // patch for Medium/DeepHunt: title is in H4, so extract only that as a description
+        if (content.startsWith('<h4>') && content.indexOf('</h4>') > 0)
+          content = content.substr(4, content.indexOf('</h4>') - 4) + "…";
+        item.description = removeHtmlTags(content);
+      }
       if (DEBUG_ADD_SRC)
         item._debug_source = val;
       FeedParser.findUnknownKeys(val, [
