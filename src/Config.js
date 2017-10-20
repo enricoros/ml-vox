@@ -14,6 +14,7 @@ const LOGO_FILES = {
   'Two Minute Papers': 'logo-misc-two-minute-papers.png',
   'Otoro': 'logo-misc-otoro.png',
   'Import AI': 'logo-misc-newsletter.png',
+  'Deep Hunt': 'logo-misc-newsletter.png',
 };
 
 const FEEDS = [
@@ -147,6 +148,14 @@ const FEEDS = [
     name: 'Import AI Newsletter',
     url: 'https://jack-clark.net/feed/',
     home: 'https://jack-clark.net/import-ai/',
+    title_prefix: '(AI newsletter)'
+  },
+  {
+    id: 'dh',
+    company: 'Deep Hunt',
+    name: 'Deep Hunt Newsletter',
+    url: 'https://deephunt.in/feed/',
+    home: 'https://deephunt.in/',
     title_prefix: '(AI newsletter)'
   }
 ];
