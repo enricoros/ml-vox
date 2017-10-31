@@ -13,8 +13,7 @@ const LOGO_FILES = {
   'OpenAI': 'logo-openai.png',
   'Two Minute Papers': 'logo-misc-two-minute-papers.png',
   'Otoro': 'logo-misc-otoro.png',
-  'Import AI': 'logo-misc-newsletter.png',
-  'Deep Hunt': 'logo-misc-newsletter.png',
+  'Newsletter': 'logo-misc-newsletter.png',
 };
 
 const FEEDS = [
@@ -83,6 +82,13 @@ const FEEDS = [
     home: 'https://magenta.tensorflow.org/blog/'
   },
   {
+    id: 'g4',
+    company: 'Google',
+    name: 'Google Machine Learning Blog',
+    url: 'https://www.blog.google/topics/machine-learning/rss/',
+    home: 'https://www.blog.google/topics/machine-learning/'
+  },
+  {
     id: 'ii',
     company: 'Intel',
     name: 'Intel Nervana Blog',
@@ -144,7 +150,7 @@ const FEEDS = [
   },
   {
     id: 'iai',
-    company: 'Import AI',
+    company: 'Newsletter',
     name: 'Import AI Newsletter',
     url: 'https://jack-clark.net/feed/',
     home: 'https://jack-clark.net/import-ai/',
@@ -152,7 +158,7 @@ const FEEDS = [
   },
   {
     id: 'dh',
-    company: 'Deep Hunt',
+    company: 'Newsletter',
     name: 'Deep Hunt Newsletter',
     url: 'https://deephunt.in/feed/',
     home: 'https://deephunt.in/',

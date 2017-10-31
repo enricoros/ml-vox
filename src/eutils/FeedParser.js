@@ -154,6 +154,7 @@ const FeedParser = {
         /* parsed */ 'title', 'description', 'link', 'pubDate', 'guid', 'media:content',
         /* skipped */ 'category', 'dc:creator', 'content:encoded', 'comments', 'wfw:commentRss', 'slash:comments', 'atom:updated',
         /* skipped amazon */ 'enclosure',
+        /* skipped google the keyword */ 'og', 'author',
       ], 'rss/post', url);
       item.hash = hashForPost(item);
       feed.posts.push(item);
