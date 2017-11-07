@@ -6,6 +6,7 @@ const LOGO_FILES = {
   'Google': 'logo-google.png',
   'Google DeepMind': 'logo-google-deepmind.png',
   'Intel': 'logo-intel-nervana.png',
+  'Medium': 'logo-medium.png',
   'Microsoft': 'logo-microsoft.png',
   'Facebook': 'logo-facebook.png',
   'NVIDIA': 'logo-nvidia.png',
@@ -26,7 +27,7 @@ const FEEDS = [
   // },
   // {
   //   id: 'q2',
-  //   company: 'Qualcomm Ventures',
+  //   company: 'Medium',
   //   name: 'Qualcomm Ventures',
   //   url: 'https://medium.com/feed/qualcomm-ventures',
   //   home: 'https://medium.com/qualcomm-ventures'
@@ -129,6 +130,13 @@ const FEEDS = [
     name: 'OpenAI Blog',
     url: 'https://blog.openai.com/rss/',
     home: 'https://blog.openai.com/'
+  },
+  {
+    id: 'ain',
+    company: 'Medium',
+    name: 'AI Now Institute',
+    url: 'https://medium.com/feed/@AINowInstitute',
+    home: 'https://medium.com/@AINowInstitute'
   },
 
   {
