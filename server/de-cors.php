@@ -55,6 +55,10 @@ $valid_requests = array(
     'https://blog.openai.com/rss/',
     'https://www.youtube.com/feeds/videos.xml',
     'http://blog.otoro.net/feed.xml',
+    'https://jack-clark.net/feed/',
+    'https://deephunt.in/feed/',
+    'https://medium.com/feed/qualcomm-ventures',
+    'https://medium.com/feed/@AINowInstitute',
     // 'example.com'
 );
 

@@ -6,6 +6,7 @@ const LOGO_FILES = {
   'Google': 'logo-google.png',
   'Google DeepMind': 'logo-google-deepmind.png',
   'Intel': 'logo-intel-nervana.png',
+  'Medium': 'logo-medium.png',
   'Microsoft': 'logo-microsoft.png',
   'Facebook': 'logo-facebook.png',
   'NVIDIA': 'logo-nvidia.png',
@@ -13,7 +14,7 @@ const LOGO_FILES = {
   'OpenAI': 'logo-openai.png',
   'Two Minute Papers': 'logo-misc-two-minute-papers.png',
   'Otoro': 'logo-misc-otoro.png',
-  'Import AI': 'logo-misc-newsletter.png',
+  'Newsletter': 'logo-misc-newsletter.png',
 };
 
 const FEEDS = [
@@ -26,7 +27,7 @@ const FEEDS = [
   // },
   // {
   //   id: 'q2',
-  //   company: 'Qualcomm Ventures',
+  //   company: 'Medium',
   //   name: 'Qualcomm Ventures',
   //   url: 'https://medium.com/feed/qualcomm-ventures',
   //   home: 'https://medium.com/qualcomm-ventures'
@@ -82,6 +83,13 @@ const FEEDS = [
     home: 'https://magenta.tensorflow.org/blog/'
   },
   {
+    id: 'g4',
+    company: 'Google',
+    name: 'Google Machine Learning Blog',
+    url: 'https://www.blog.google/topics/machine-learning/rss/',
+    home: 'https://www.blog.google/topics/machine-learning/'
+  },
+  {
     id: 'ii',
     company: 'Intel',
     name: 'Intel Nervana Blog',
@@ -123,6 +131,13 @@ const FEEDS = [
     url: 'https://blog.openai.com/rss/',
     home: 'https://blog.openai.com/'
   },
+  {
+    id: 'ain',
+    company: 'Medium',
+    name: 'AI Now Institute',
+    url: 'https://medium.com/feed/@AINowInstitute',
+    home: 'https://medium.com/@AINowInstitute'
+  },
 
   {
     disabled: false,
@@ -143,10 +158,18 @@ const FEEDS = [
   },
   {
     id: 'iai',
-    company: 'Import AI',
+    company: 'Newsletter',
     name: 'Import AI Newsletter',
     url: 'https://jack-clark.net/feed/',
     home: 'https://jack-clark.net/import-ai/',
+    title_prefix: '(AI newsletter)'
+  },
+  {
+    id: 'dh',
+    company: 'Newsletter',
+    name: 'Deep Hunt Newsletter',
+    url: 'https://deephunt.in/feed/',
+    home: 'https://deephunt.in/',
     title_prefix: '(AI newsletter)'
   }
 ];
