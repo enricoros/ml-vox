@@ -118,10 +118,11 @@ const FEEDS = [
     home: 'https://blogs.nvidia.com/blog/category/deep-learning/'
   },
   {
+    disabled: true,
     id: 'cc',
     company: 'CEVA',
     name: 'CEVA Experts Blog',
-    url: 'http://www.ceva-dsp.com/ourblog/feed/',
+    url: 'https://www.ceva-dsp.com/ourblog/feed',
     home: 'http://www.ceva-dsp.com/ourblog/'
   },
   {
@@ -137,6 +138,22 @@ const FEEDS = [
     name: 'AI Now Institute',
     url: 'https://medium.com/feed/@AINowInstitute',
     home: 'https://medium.com/@AINowInstitute'
+  },
+  {
+    id: 'bpw',
+    company: 'Medium',
+    name: 'Pete Warden\'s blog',
+    url: 'https://petewarden.com/feed/',
+    home: 'https://petewarden.com',
+    title_prefix: 'Pete Warden:'
+  },
+  {
+    id: 'bak',
+    company: 'Medium',
+    name: 'Andrej Karpathy',
+    url: 'https://medium.com/feed/@karpathy',
+    home: 'https://medium.com/@karpathy',
+    title_prefix: 'Andrej Karpathy:'
   },
 
   {
