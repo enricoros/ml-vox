@@ -155,6 +155,14 @@ const FEEDS = [
     home: 'https://medium.com/@karpathy',
     title_prefix: 'Andrej Karpathy:'
   },
+  {
+    id: 'bds',
+    company: 'Medium',
+    name: 'Distill',
+    url: 'https://distill.pub/rss.xml',
+    home: 'https://distill.pub',
+    title_prefix: 'Distill:'
+  },
 
   {
     disabled: false,
