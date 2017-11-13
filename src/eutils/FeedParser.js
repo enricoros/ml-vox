@@ -9,7 +9,7 @@ const v = (container, key) => {
     return '';
   if (Array.isArray(value)) {
     if (value.length > 1) {
-      if (key !== 'media:content') {
+      if (key === 'media:content') {
         // NOTE: there are many images in this post on 'media:content', we'll use the first, hopefully it's
         // representative enough.
         //console.log(value);
