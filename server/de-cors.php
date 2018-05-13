@@ -36,29 +36,36 @@ define('CSAJAX_DEBUG', false);
 
 /**
  * A set of valid cross domain requests
+ * Update with:
+ *   grep url src/Config.js | awk -F\'  '{print $2}' | awk -F? '{print $1}' | sed 's/%20/ /g' | sort | awk -v q="'" '{ print "    " q $0 q "," }'
  */
 $valid_requests = array(
-    'https://developer.qualcomm.com/rssfeed',
+    'http://apps.shareholder.com/rss/rss.aspx',
+    'http://blog.otoro.net/feed.xml',
     'http://www.qualcommlife.com/blog/feed/rss/our-blog',
     'https://aws.amazon.com/blogs/ai/feed/',
+    'https://blog.openai.com/rss/',
+    'https://blogs.microsoft.com/next/feed/',
+    'https://blogs.nvidia.com/blog/category/deep-learning/feed/',
+    'https://caffe2.ai/feed.xml',
+    'https://deephunt.in/feed/',
+    'https://deepmind.com/blog/feed/basic/',
+    'https://developer.qualcomm.com/rssfeed',
+    'https://distill.pub/rss.xml',
+    'https://jack-clark.net/feed/',
     'https://machinelearning.apple.com/feed.xml',
+    'https://magenta.tensorflow.org/feed.xml',
+    'https://medium.com/feed/@AINowInstitute',
+    'https://medium.com/feed/@karpathy',
+    'https://medium.com/feed/qualcomm-ventures',
+    'https://petewarden.com/feed/',
+    'https://www.blog.google/topics/machine-learning/rss/',
     'https://www.blogger.com/feeds/21224994/posts/default',
     'https://www.blogger.com/feeds/21224994/posts/default/-/Machine Learning',
-    'https://deepmind.com/blog/feed/basic/',
-    'https://magenta.tensorflow.org/feed.xml',
+    'https://www.blogger.com/feeds/8474926331452026626/posts/default',
+    'https://www.ceva-dsp.com/ourblog/feed',
     'https://www.intelnervana.com/feed/',
-    'https://blogs.microsoft.com/ai/feed/',
-    'https://blogs.microsoft.com/next/feed/',
-    'https://caffe2.ai/feed.xml',
-    'https://blogs.nvidia.com/blog/category/deep-learning/feed/',
-    'https://www.ceva-dsp.com/ourblog/feed/',
-    'https://blog.openai.com/rss/',
     'https://www.youtube.com/feeds/videos.xml',
-    'http://blog.otoro.net/feed.xml',
-    'https://jack-clark.net/feed/',
-    'https://deephunt.in/feed/',
-    'https://medium.com/feed/qualcomm-ventures',
-    'https://medium.com/feed/@AINowInstitute',
     // 'example.com'
 );
 
@@ -76,12 +83,12 @@ $curl_options = array(
 /* * * STOP EDITING HERE UNLESS YOU KNOW WHAT YOU ARE DOING * * */
 
 // identify request headers
-$request_headers = array( );
+$request_headers = array();
 foreach ($_SERVER as $key => $value) {
-    if (strpos($key, 'HTTP_') === 0  ||  strpos($key, 'CONTENT_') === 0) {
+    if (strpos($key, 'HTTP_') === 0 || strpos($key, 'CONTENT_') === 0) {
         $headername = str_replace('_', ' ', str_replace('HTTP_', '', $key));
         $headername = str_replace(' ', '-', ucwords(strtolower($headername)));
-        if (!in_array($headername, array( 'Host', 'X-Proxy-Url' ))) {
+        if (!in_array($headername, array('Host', 'X-Proxy-Url'))) {
             $request_headers[] = "$headername: $value";
         }
     }
@@ -168,7 +175,7 @@ curl_setopt($ch, CURLOPT_HEADER, true);       // enabled response headers
 if ('POST' == $request_method) {
     $post_data = is_array($request_params) ? http_build_query($request_params) : $request_params;
     curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS,  $post_data);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);
 } elseif ('PUT' == $request_method || 'DELETE' == $request_method) {
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $request_method);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $request_params);
@@ -183,8 +190,8 @@ if (is_array($curl_options) && 0 <= count($curl_options)) {
 $response = curl_exec($ch);
 curl_close($ch);
 
-file_put_contents ( '/tmp/ad', $request_url);
-file_put_contents ( '/tmp/ae', $response);
+//file_put_contents('/tmp/ad', $request_url);
+//file_put_contents('/tmp/ae', $response);
 
 // split response to header and content
 list($response_headers, $response_content) = preg_split('/(\r\n){2}/', $response, 2);

@@ -90,6 +90,13 @@ const FEEDS = [
     home: 'https://www.blog.google/topics/machine-learning/'
   },
   {
+    id: 'g5',
+    company: 'Google',
+    name: 'Google AI Blog',
+    url: 'https://www.blogger.com/feeds/8474926331452026626/posts/default',
+    home: 'https://ai.googleblog.com'
+  },
+  {
     id: 'ii',
     company: 'Intel',
     name: 'Intel Nervana Blog',
@@ -100,7 +107,7 @@ const FEEDS = [
     id: 'mm',
     company: 'Microsoft',
     name: 'Microsoft Next',
-    url: 'https://blogs.microsoft.com/ai/feed/',
+    url: 'https://blogs.microsoft.com/next/feed/',
     home: 'https://blogs.microsoft.com/next/'
   },
   {
@@ -122,7 +129,7 @@ const FEEDS = [
     id: 'cc',
     company: 'CEVA',
     name: 'CEVA Experts Blog',
-    url: 'https://www.ceva-dsp.com/ourblog/feed',
+    url: 'https://www.ceva-dsp.com/ourblog/feed/',
     home: 'http://www.ceva-dsp.com/ourblog/'
   },
   {
