@@ -210,4 +210,4 @@ const FEEDS = [
 //   'https://www.eff.org/ai/metrics', 'http://aiweekly.co/
 // ];
 
-export {FEEDS, LOGO_FILES};
+module.exports = {FEEDS, LOGO_FILES};
