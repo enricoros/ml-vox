@@ -255,4 +255,4 @@ const FeedParser = {
   },
 };
 
-exports.FeedParser = FeedParser;
+export {FeedParser};
