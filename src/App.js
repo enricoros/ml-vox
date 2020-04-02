@@ -10,7 +10,7 @@ import request from "request";
 
 import {FEEDS, LOGO_FILES} from "./Config";
 import {NNArt} from "./nn/NNArt";
-const FeedParser = require("../src/eutils/FeedParser");
+const FeedParserModule = require("../src/eutils/FeedParser");
 
 const colorize = (snippet, color) => <span style={{color: color}}>{snippet}</span>;
 
@@ -313,7 +313,7 @@ class App extends Component {
   }
 
   updateAllWithClientFetching(ignoreDisabled) {
-    FEEDS.filter(spec => !spec.disabled || ignoreDisabled).forEach(spec => FeedParser.parseWebFeed(spec.url, true, (err, feed) => {
+    FEEDS.filter(spec => !spec.disabled || ignoreDisabled).forEach(spec => FeedParserModule.FeedParser.parseWebFeed(spec.url, true, (err, feed) => {
       if (!err) {
         feed.fetchDate = Date.now();
         this.shallowMergeFeed(feed, spec);

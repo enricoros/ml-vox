@@ -1,6 +1,6 @@
 const {readFileSync, writeFileSync} = require('fs');
 const {FEEDS} = require("../src/Config");
-const FeedParser = require("../src/eutils/FeedParser");
+const FeedParserModule = require("../src/eutils/FeedParser");
 
 const OUTPUT_ACCUMULATOR_FILE = 'feed.json';
 
@@ -31,7 +31,7 @@ function processNextFeed() {
     return processNextFeed();
   }
   console.log('fetching ' + spec.company + ' (' + spec.id + ')');
-  FeedParser.parseWebFeed(spec.url, false, (err, feed) => {
+  FeedParserModule.FeedParser.parseWebFeed(spec.url, false, (err, feed) => {
     console.log('  ..' + spec.company + (err ? ' ERROR' : ' ok'));
     if (!err) {
       // shrink the descriptions, for size protection

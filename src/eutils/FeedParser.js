@@ -255,4 +255,4 @@ const FeedParser = {
   },
 };
 
-module.exports = FeedParser;
+exports.FeedParser = FeedParser;
