@@ -274,8 +274,11 @@ class App extends Component {
         const feed = processedFeeds[spec.id];
         if (feed)
           this.shallowMergeFeed(feed, spec);
-        else
-          App.handleError('The aggregated feed is missing ' + spec.id);
+        else {
+          // disable for production
+          if (process.env.NODE_ENV !== 'production')
+            App.handleError('The aggregated feed is missing ' + spec.id);
+        }
       });
       this.updatePostsList();
       this.showRefreshPopup();
