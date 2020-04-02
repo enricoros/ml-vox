@@ -93,7 +93,7 @@ const hashForPost = (p, salt = '') => {
   return hash;
 };
 
-export const FeedParser = {
+const FeedParser = {
 
   deCORS: url => "https://services.enricoros.com/de-cors.php?csurl=" + encodeURIComponent(url),
 
@@ -254,3 +254,5 @@ export const FeedParser = {
     return feed;
   },
 };
+
+module.exports = FeedParser;

@@ -1,6 +1,6 @@
 const {readFileSync, writeFileSync} = require('fs');
 const {FEEDS} = require("../src/Config");
-const {FeedParser} = require("../src/eutils/FeedParser");
+const FeedParser = require("../src/eutils/FeedParser");
 
 const OUTPUT_ACCUMULATOR_FILE = 'feed.json';
 

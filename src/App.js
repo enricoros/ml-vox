@@ -10,7 +10,7 @@ import request from "request";
 
 import {FEEDS, LOGO_FILES} from "./Config";
 import {NNArt} from "./nn/NNArt";
-const {FeedParser} = require("../src/eutils/FeedParser");
+const FeedParser = require("../src/eutils/FeedParser");
 
 const colorize = (snippet, color) => <span style={{color: color}}>{snippet}</span>;
 
