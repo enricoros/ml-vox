@@ -9,8 +9,8 @@ import YouTube from "react-youtube";
 import request from "request";
 
 import {FEEDS, LOGO_FILES} from "./Config";
-import {FeedParser, ellipsize} from "./eutils/FeedParser";
 import {NNArt} from "./nn/NNArt";
+const {FeedParser, ellipsize} = require("../src/eutils/FeedParser");
 
 const colorize = (snippet, color) => <span style={{color: color}}>{snippet}</span>;
 

@@ -253,4 +253,4 @@ const FeedParser = {
   },
 };
 
-export {FeedParser, ellipsize};
+module.exports = {FeedParser, ellipsize};
