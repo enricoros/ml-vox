@@ -76,10 +76,20 @@ const stringHash = (str) => {
     hash = ((hash << 5) - hash) + chr;
     hash |= 0; // Convert to 32bit integer
   }
-  return hash;
+  return hash.toString(16);
 };
 
-const hashForPost = (p) => stringHash(p.url.length ? p.url : p.title + p.date);
+const hashCacheToAvoidDupes = [];
+const hashForPost = (p, salt='') => {
+  const hash = stringHash((p.url.length ? p.url : p.title) + p.date + salt);
+  if (hashCacheToAvoidDupes.indexOf(hash) === -1)
+    hashCacheToAvoidDupes.push(hash);
+  else {
+    console.log('Post has duplicate hash; salting.');
+    return hashForPost(p, Math.random().toString(16));
+  }
+  return hash;
+};
 
 const FeedParser = {
 
@@ -134,6 +144,7 @@ const FeedParser = {
       /* ignored */ 'language', 'generator', 'atom:link', 'lastBuildDate', 'sy:updatePeriod',
       'sy:updateFrequency', 'ttl', 'pubDate', 'image', 'webMaster',
       /* skipped Import AI*/ 'cloud',
+      /* skipped Microsoft AI Blog*/ 'site',
     ], 'rss/channel', url);
     for (let val of [].concat(channel.item)) {
       const item = {
@@ -161,6 +172,7 @@ const FeedParser = {
         /* skipped */ 'category', 'dc:creator', 'content:encoded', 'comments', 'wfw:commentRss', 'slash:comments', 'atom:updated',
         /* skipped amazon */ 'enclosure',
         /* skipped google the keyword */ 'og', 'author',
+        /* skipped microsoft AI blog */ 'post-id',
       ], 'rss/post', url);
       item.hash = hashForPost(item);
       feed.posts.push(item);

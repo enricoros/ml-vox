@@ -24,7 +24,11 @@ function processNextFeed() {
     doneWithAllFeeds();
     return;
   }
-  console.log('fetching ' + spec.company);
+  if (spec.disabled) {
+    console.log('skipping (disabled in Config.js): ' + spec.company + ' (' + spec.id + ')');
+    return processNextFeed();
+  }
+  console.log('fetching ' + spec.company + ' (' + spec.id + ')');
   FeedParser.parseWebFeed(spec.url, false, (err, feed) => {
     console.log('  ..' + spec.company + (err ? ' ERROR' : ' ok'));
     if (!err) {
@@ -36,6 +40,7 @@ function processNextFeed() {
       Accumulator[spec.id] = feed;
     } else {
       console.error("Error while fetching " + spec.name + ", on: " + spec.url);
+      console.log(spec);
       console.log(err);
     }
     // proceed with the next fetch

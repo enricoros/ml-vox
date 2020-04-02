@@ -10,7 +10,7 @@ const LOGO_FILES = {
   'Microsoft': 'logo-microsoft.png',
   'Facebook': 'logo-facebook.png',
   'NVIDIA': 'logo-nvidia.png',
-  'CEVA': 'logo-ceva.png',
+  // 'CEVA': 'logo-ceva.png',
   'OpenAI': 'logo-openai.png',
   'Two Minute Papers': 'logo-misc-two-minute-papers.png',
   'Otoro': 'logo-misc-otoro.png',
@@ -85,9 +85,9 @@ const FEEDS = [
   {
     id: 'g4',
     company: 'Google',
-    name: 'Google Machine Learning Blog',
-    url: 'https://www.blog.google/topics/machine-learning/rss/',
-    home: 'https://www.blog.google/topics/machine-learning/'
+    name: 'Google AI Technology Blog',
+    url: 'https://www.blog.google/technology/ai/rss',
+    home: 'https://www.blog.google/technology/ai/'
   },
   {
     id: 'g5',
@@ -107,10 +107,11 @@ const FEEDS = [
     id: 'mm',
     company: 'Microsoft',
     name: 'Microsoft Next',
-    url: 'https://blogs.microsoft.com/next/feed/',
-    home: 'https://blogs.microsoft.com/next/'
+    url: 'https://blogs.microsoft.com/ai/feed/',
+    home: 'https://blogs.microsoft.com/ai/'
   },
   {
+    disabled: true, /* FB has the FB AI blog + PyTorch blog - both miss feeds */
     id: 'ff',
     company: 'Facebook',
     name: 'Caffe2 Blog',

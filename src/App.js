@@ -1,10 +1,9 @@
 import "bootstrap/dist/css/bootstrap.css";
-import "bootstrap/dist/css/bootstrap-theme.css";
 import "react-notifications/lib/notifications.css";
 import "./App.css";
 
 import React, {Component} from "react";
-import {Button, Clearfix, Col, Row} from "react-bootstrap";
+import {Button, Col, Row} from "react-bootstrap";
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import YouTube from "react-youtube";
 import request from "request";
@@ -33,14 +32,16 @@ const humanDate = (dateTS) => {
     prefix = 'this week, on ';
   else if (elapsed < 14 * 24 * 3600 * 1000)
     prefix = 'last week, on ';
-  return prefix + date.toLocaleDateString().replace('/2017', '').replace('/', ' / ');
+  return prefix + date.toLocaleDateString().replace('/2020', ''); //.replace('/', ' / ');
 };
 
 const YouTubeOpts = {
+  width: "380",
+  height: "285",
   playerVars: {
     controls: 1,
     rel: 0,
-    showinfo: 0
+    showinfo: 0,
   }
 };
 
@@ -57,7 +58,7 @@ class YouTubeWrapper extends Component {
     if (isDisabled)
       return <div><Button onClick={(e) => YouTubeWrapper.onToggle(e, false)}> ► Enable YouTube</Button></div>;
     return (
-      <div>
+      <div className="clearfix">
         <YouTube videoId={this.props.videoId} opts={YouTubeOpts}/>
         <br/>
         <Button onClick={(e) => YouTubeWrapper.onToggle(e, true)}>Disable YouTube.</Button>
@@ -83,7 +84,6 @@ const Post = ({post}) =>
         <span>{ellipsize(post.description || post.title, 800)}</span>
       </p>
       {post._ytVideoId && <YouTubeWrapper videoId={post._ytVideoId}/>}
-      <Clearfix/>
       <div className="Footer">
         <Row>
           <Col sm={7} style={{textAlign: 'left'}}>- {post.author || post.feed.title}, {humanDate(post.date)}</Col>
@@ -154,16 +154,16 @@ const Header = ({onRefreshClick, scale, onScaleChange, onFeedChange}) =>
     <div className="container">
       <h2>
         <Row>
-          <Col sm={8} smHidden xsHidden>
+          <Col sm={8} className="d-none d-md-block">
             <HeaderTitle/>
           </Col>
-          <Col sm={8} mdHidden lgHidden>
+          <Col sm={8} className="d-block d-lg-none">
             ML Leaders Voice
           </Col>
-          <Col sm={4} className="App-header-right" xsHidden>
+          <Col sm={4} className="App-header-right d-none d-sm-block">
             <Button onClick={onScaleChange} className="btn-transparent">{scale}</Button>
             {/*<Button onClick={onFeedChange} className="btn-transparent">Feeds</Button>*/}
-            <Button onClick={onRefreshClick} bsStyle="primary">Refresh</Button>
+            <Button onClick={onRefreshClick} variant="primary">Refresh</Button>
           </Col>
         </Row>
       </h2>
@@ -195,11 +195,15 @@ const Footer = () =>
 
 const LogoList = ({filterCompany, onCompanyFilter}) =>
   <div className="LogoList">
-    {Object.keys(LOGO_FILES).sort().map(company_name =>
-      <img src={LOGO_FILES[company_name]} key={company_name} alt={company_name} data-company_name={company_name}
-           onMouseEnter={e => onCompanyFilter(company_name, false)} onMouseLeave={e => onCompanyFilter(null, false)}
-           onClick={e => onCompanyFilter(company_name, true)}
-           className={filterCompany === company_name ? 'active' : ''}/>)}
+    {Object.keys(LOGO_FILES).sort().map(company_name => {
+      const company_feed = FEEDS.find(feed => feed.company === company_name);
+      if (company_feed && company_feed.disabled) return null;
+      return (<img src={LOGO_FILES[company_name]} key={company_name} alt={company_name} data-company_name={company_name}
+                  onMouseEnter={e => onCompanyFilter(company_name, false)}
+                  onMouseLeave={e => onCompanyFilter(null, false)}
+                  onClick={e => onCompanyFilter(company_name, true)}
+                  className={filterCompany === company_name ? 'active' : ''}/>);
+    })}
   </div>;
 
 // To be added later, when we talk about Routes in this app
