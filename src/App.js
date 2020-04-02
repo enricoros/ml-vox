@@ -8,9 +8,9 @@ import {NotificationContainer, NotificationManager} from 'react-notifications';
 import YouTube from "react-youtube";
 import request from "request";
 
-import {FEEDS, LOGO_FILES} from "./Config";
 import {NNArt} from "./nn/NNArt";
-import {FeedParser} from "./eutils/FeedParser";
+import {FEEDS, LOGO_FILES} from "./Config";
+import {FeedParser, ellipsize} from "./eutils/FeedParser";
 
 const colorize = (snippet, color) => <span style={{color: color}}>{snippet}</span>;
 
@@ -66,8 +66,6 @@ class YouTubeWrapper extends Component {
     );
   }
 }
-
-const ellipsize = (str, len) => str.length > len ? str.substr(0, len - 2) + "…" : str;
 
 const Post = ({post}) =>
   <div className="Post">

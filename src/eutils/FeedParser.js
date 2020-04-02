@@ -1,5 +1,5 @@
-const request = require("request");
-const xml2js = require("xml2js");
+import request from "request";
+import xml2js from "xml2js";
 
 const DEBUG_ADD_SRC = false;
 
@@ -255,4 +255,4 @@ const FeedParser = {
   },
 };
 
-export {FeedParser};
+export {FeedParser, ellipsize};

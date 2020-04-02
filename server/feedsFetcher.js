@@ -1,7 +1,6 @@
-import {FeedParser} from "../src/eutils/FeedParser";
-
-const {readFileSync, writeFileSync} = require('fs');
-const {FEEDS} = require("../src/Config");
+import {readFileSync, writeFileSync} from 'fs';
+import {FeedParser, ellipsize} from "../src/eutils/FeedParser.js";
+import {FEEDS} from "../src/Config.js";
 
 const OUTPUT_ACCUMULATOR_FILE = 'feed.json';
 
@@ -16,8 +15,6 @@ const readJsonFile = (fileName) => {
 };
 
 const writeJsonFile = (fileName, jsonObject) => writeFileSync(fileName, JSON.stringify(jsonObject, null, 1), 'utf8');
-
-const ellipsize = (str, len) => str.length > len ? str.substr(0, len - 2) + "…" : str;
 
 const Accumulator = readJsonFile(OUTPUT_ACCUMULATOR_FILE);
 

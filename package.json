@@ -2,6 +2,7 @@
   "name": "ml-vox",
   "version": "0.2.0",
   "private": true,
+  "type": "module",
   "dependencies": {
     "bootstrap": "^4.4.1",
     "deeplearn": "^0.1.2",
@@ -34,9 +35,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "compilerOptions": {
-    "module": "es6",
-    "target": "es5"
   }
 }
