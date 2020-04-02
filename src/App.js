@@ -58,7 +58,7 @@ class YouTubeWrapper extends Component {
     if (isDisabled)
       return <div><Button onClick={(e) => YouTubeWrapper.onToggle(e, false)}> ► Enable YouTube</Button></div>;
     return (
-      <div className="clearfix">
+      <div>
         <YouTube videoId={this.props.videoId} opts={YouTubeOpts}/>
         <br/>
         <Button onClick={(e) => YouTubeWrapper.onToggle(e, true)}>Disable YouTube.</Button>
@@ -72,7 +72,7 @@ const Post = ({post}) =>
     {post.newOnScreen && <div className="NewOnScreen"/>}
     <h2><span className="Prefix">{post.feed.spec.title_prefix}</span> <a href={post.url}>{post.title}</a></h2>
     <div className="Content">
-      <p>
+      <p className="clearfix">
         {!post._ytVideoId && <span className='Company'>
           {/*post.feed.spec.company*/ /* Company Logo on the left */}
           <img src={LOGO_FILES[post.feed.spec.company]} onClick={() => console.log(post)}
@@ -199,10 +199,10 @@ const LogoList = ({filterCompany, onCompanyFilter}) =>
       const company_feed = FEEDS.find(feed => feed.company === company_name);
       if (company_feed && company_feed.disabled) return null;
       return (<img src={LOGO_FILES[company_name]} key={company_name} alt={company_name} data-company_name={company_name}
-                  onMouseEnter={e => onCompanyFilter(company_name, false)}
-                  onMouseLeave={e => onCompanyFilter(null, false)}
-                  onClick={e => onCompanyFilter(company_name, true)}
-                  className={filterCompany === company_name ? 'active' : ''}/>);
+                   onMouseEnter={e => onCompanyFilter(company_name, false)}
+                   onMouseLeave={e => onCompanyFilter(null, false)}
+                   onClick={e => onCompanyFilter(company_name, true)}
+                   className={filterCompany === company_name ? 'active' : ''}/>);
     })}
   </div>;
 

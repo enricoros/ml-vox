@@ -144,13 +144,21 @@ body {
   color: darkgray;
 }
 
+.Post > h2 > a {
+  color: #5b6921;
+  font-family: 'Open Sans', sans-serif;
+}
+
 .Post .Content {
-  font-family: 'Noto Serif', serif;
-  font-size: 16px;
-  line-height: 1.84em;
+  font-family: 'Open Sans', serif;
+  line-height: 1.9em;
+  font-size: 14px;
 }
 
 .Post .Content > p {
+  font-family: 'Noto Serif', serif;
+  font-size: 16px;
+  color: #333;
   margin: 0;
 }
 
