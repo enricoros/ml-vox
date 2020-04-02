@@ -10,7 +10,7 @@ import request from "request";
 
 import {FEEDS, LOGO_FILES} from "./Config";
 import {NNArt} from "./nn/NNArt";
-const {FeedParser, ellipsize} = require("../src/eutils/FeedParser");
+const {FeedParser} = require("../src/eutils/FeedParser");
 
 const colorize = (snippet, color) => <span style={{color: color}}>{snippet}</span>;
 
@@ -66,6 +66,8 @@ class YouTubeWrapper extends Component {
     );
   }
 }
+
+const ellipsize = (str, len) => str.length > len ? str.substr(0, len - 2) + "…" : str;
 
 const Post = ({post}) =>
   <div className="Post">

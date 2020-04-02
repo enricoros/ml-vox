@@ -46,7 +46,9 @@ const atomFindHtmlUrl = (atomUrls) => {
   return atomUrls;
 };
 
-const ellipsize = (str, len) => str.length > len ? str.substr(0, len - 2) + "…" : str;
+function ellipsize(str, len) {
+  return str.length > len ? str.substr(0, len - 2) + "…" : str;
+}
 
 const removeHtmlTags = (summary) => summary
   .replace(/<\/?[^>]+(>|$)/g, "")
@@ -80,7 +82,7 @@ const stringHash = (str) => {
 };
 
 const hashCacheToAvoidDupes = [];
-const hashForPost = (p, salt='') => {
+const hashForPost = (p, salt = '') => {
   const hash = stringHash((p.url.length ? p.url : p.title) + p.date + salt);
   if (hashCacheToAvoidDupes.indexOf(hash) === -1)
     hashCacheToAvoidDupes.push(hash);
@@ -253,4 +255,5 @@ const FeedParser = {
   },
 };
 
-module.exports = {FeedParser, ellipsize};
+exports.FeedParser = FeedParser;
+exports.ellipsize = ellipsize;
