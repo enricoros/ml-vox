@@ -1,0 +1,16 @@
+# Builds the Frontend of the application inside a node image
+FROM node:lts-buster
+
+# Install the dependencies
+WORKDIR /app
+COPY package.json /app
+COPY package-lock.json /app
+RUN npm install --silent
+
+# Copy the react application
+COPY . /app
+
+# Build the application
+RUN npm run build
+
+# The output is now in /app/build
