@@ -53,6 +53,7 @@ const FEEDS = [
     home: 'https://aws.amazon.com/blogs/ai/'
   },
   {
+    disabled: true,
     id: 'aa',
     company: 'Apple',
     name: 'Apple Machine Learning Journal',
@@ -97,6 +98,7 @@ const FEEDS = [
     home: 'https://ai.googleblog.com'
   },
   {
+    disabled: true,
     id: 'ii',
     company: 'Intel',
     name: 'Intel Nervana Blog',
