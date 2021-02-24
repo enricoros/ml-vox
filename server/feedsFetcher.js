@@ -29,7 +29,7 @@ function processNextFeed() {
     return processNextFeed();
   }
   console.log('fetching ' + spec.company + ' (' + spec.id + ')');
-  FeedParser.parseWebFeed(spec.url, false, (err, feed) => {
+  FeedParser.parseWebFeed(spec.url, (err, feed) => {
     console.log('  ..' + spec.company + (err ? ' ERROR' : ' ok'));
     if (!err) {
       // shrink the descriptions, for size protection

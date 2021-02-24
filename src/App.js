@@ -311,7 +311,7 @@ class App extends Component {
   }
 
   updateAllWithClientFetching(ignoreDisabled) {
-    FEEDS.filter(spec => !spec.disabled || ignoreDisabled).forEach(spec => FeedParser.parseWebFeed(spec.url, true, (err, feed) => {
+    FEEDS.filter(spec => !spec.disabled || ignoreDisabled).forEach(spec => FeedParser.parseWebFeed(spec.url, (err, feed) => {
       if (!err) {
         feed.fetchDate = Date.now();
         this.shallowMergeFeed(feed, spec);
