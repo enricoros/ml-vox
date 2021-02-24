@@ -7,15 +7,15 @@
     "bootstrap": "^4.6.0",
     "deeplearn": "^0.1.2",
     "react": "^17.0.1",
-    "react-bootstrap": "^1.4.3",
+    "react-bootstrap": "^1.5.0",
     "react-dom": "^17.0.1",
     "react-ga": "^3.3.0",
     "react-notifications": "^1.7.2",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^4.0.2",
+    "react-scripts": "^4.0.3",
     "react-youtube": "^7.13.1",
     "request": "^2.88.2",
-    "typescript": "^4.1.5",
+    "typescript": "^4.2.2",
     "xml2js": "^0.4.23"
   },
   "scripts": {
