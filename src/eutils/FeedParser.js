@@ -100,9 +100,9 @@ const FeedParser = {
       url,
       headers: {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.19 Safari/537.36'},
       gzip: true,
-      followRedirect: true
+      followRedirect: true,
+      'Cache-Control': 'no-cache, no-store, must-revalidate',
     };
-    options['Cache-Control'] = 'no-cache, no-store, must-revalidate';
     request(options, (error, response, xmlData) => {
       // console.log('server encoded the data as: ' + (response.headers['content-encoding'] || 'identity'));
       if (error || !response || response.statusCode !== 200) {

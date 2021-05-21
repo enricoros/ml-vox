@@ -8,7 +8,6 @@ import {NotificationContainer, NotificationManager} from 'react-notifications';
 import YouTube from "react-youtube";
 import request from "request";
 
-import {NNArt} from "./nn/NNArt";
 import {FEEDS, LOGO_FILES} from "./Config";
 import {FeedParser, ellipsize} from "./eutils/FeedParser";
 
@@ -367,7 +366,6 @@ class App extends Component {
     return (
       <div className={'App-' + this.state.scale}>
         <div className="App-header-container">
-          <NNArt/>
           <Header scale={this.state.scale} onRefreshClick={this.onRefreshClicked.bind(this)}
                   onScaleChange={this.onScaleChange.bind(this)}/>
           {this.state.posts.length > 0 /* conditional render to yield to feed.json*/ &&
