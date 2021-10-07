@@ -160,7 +160,7 @@ const Header = ({onRefreshClick, scale, onScaleChange, onFeedChange}) =>
             ML Leaders Voice
           </Col>
           <Col sm={4} className="App-header-right d-none d-sm-block">
-            <Button onClick={onScaleChange} className="btn-transparent">{scale}</Button>
+            {/*<Button onClick={onScaleChange} className="btn-transparent">{scale}</Button>*/}
             {/*<Button onClick={onFeedChange} className="btn-transparent">Feeds</Button>*/}
             <Button onClick={onRefreshClick} variant="primary">Refresh</Button>
           </Col>
@@ -340,9 +340,9 @@ class App extends Component {
   }
 
   onScaleChange() {
-    this.setState({
-      scale: this.state.scale === 'Large' ? 'Small' : 'Large'
-    });
+    // this.setState({
+    //   scale: this.state.scale === 'Large' ? 'Small' : 'Large'
+    // });
   }
 
   onCompanyFilter(companyName, sticky) {

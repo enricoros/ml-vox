@@ -147,6 +147,7 @@ body {
 .Post > h2 > a {
   color: #5b6921;
   font-family: 'Open Sans', sans-serif;
+  text-decoration: none;
 }
 
 .Post .Content {
