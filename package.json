@@ -2,6 +2,7 @@
   "name": "ml-vox",
   "version": "0.4.0",
   "private": true,
+  "type": "module",
   "dependencies": {
     "bootstrap": "^5.1.2",
     "react": "^17.0.2",
