@@ -18,7 +18,7 @@
     "react-ga": "^3.3.0",
     "react-notifications": "^1.7.3",
     "react-router-dom": "^6.2.1",
-    "react-scripts": "^4.0.3",
+    "react-scripts": "^5.0.1",
     "react-youtube": "^7.13.1",
     "request": "^2.88.2",
     "xml2js": "^0.4.23"
